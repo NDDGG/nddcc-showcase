@@ -1558,6 +1558,41 @@ const slides = [
       "The Research Vault is accessible from the SENCO portal (intervention evidence), the teacher portal (understanding conditions), and the social services portal (court report evidence). Research travels to where decisions are made."
     ],
     images:["NRV Dashboard.png"]
+  },
+  {
+    id:"analytics",
+    group:"Infrastructure & Governance",
+    title:"Analytics Portal — Predictive Risk Intelligence",
+    subtitle:"In-database machine learning powered by Teradata ClearScape — composite risk scoring, anomaly detection, and model management across the entire child population.",
+    pill:"Analytics & ML",
+    tags:["ClearScape ML","Risk scoring","Anomaly detection","13 deployed models"],
+    narrativeTitle:"Data that sees what people miss",
+    narrativeText:"The Analytics Portal is the predictive intelligence layer of the platform. It uses Teradata ClearScape's in-database machine learning to score every child across multiple risk dimensions — exclusion risk, attendance collapse, intervention effectiveness — and surfaces the children who need attention before a crisis develops. This is not a retrospective reporting tool. It is a forward-looking early warning system that runs inside the database where the data lives, so nothing is extracted, copied, or exposed unnecessarily.",
+    why:[
+      "75 children scored across multiple risk dimensions in real time. The dashboard shows composite risk distribution — 94% Low, 5% Moderate, 2% Critical — so teams focus where it matters.",
+      "13 deployed ML models (ML_GLM algorithm) running inside Teradata ClearScape. Models are trained on platform data and score children using exclusion risk, attendance collapse, and intervention features.",
+      "Anomaly detection uses Z-score analysis to identify children whose metrics deviate significantly from expected norms — catching problems that manual review would miss.",
+      "Risk Overview shows every child's full risk profile — ND profile, exclusion risk, attendance risk, composite score, and risk level — filterable and sortable for case prioritisation."
+    ],
+    screens:[
+      "Dashboard — population overview, risk distribution, top 10 highest-risk children, quick actions",
+      "Risk Overview — full child population risk table with filtering by profile and risk level",
+      "Model Management — 13 deployed ML models, training controls, algorithm details, coefficient storage",
+      "Anomaly Detection — Z-score statistical analysis, severity filtering, metric-level anomaly identification"
+    ],
+    benefits:[
+      "Population-level risk intelligence at a glance. 75 children, 277 active interventions, composite risk distribution — the numbers that matter for strategic resource allocation.",
+      "Every child scored and ranked. Filter by ND profile (ASD, ADHD, Dyspraxia, Tourette, Sensory Processing) and risk level to find who needs attention now.",
+      "13 machine learning models deployed and manageable from one screen. Train, retrain, monitor accuracy, and track coefficient storage — ML governance built in.",
+      "Statistical anomaly detection catches what human review misses. When a child's metrics deviate from expected norms, the system flags it before it becomes a crisis."
+    ],
+    connections:[
+      "The Analytics Portal draws data from every child-facing portal in the platform — attendance from the school portal, behaviour from the teacher portal, interventions from the SENCO portal, placement stability from foster home and social services portals. It is the only place where all of this data is scored together.",
+      "Risk scores generated here surface in the LA Dashboard as population-level intelligence — helping directors of SEND allocate resources based on evidence, not anecdote.",
+      "Anomaly alerts can trigger notifications in the Navigator portal, which routes them to the relevant professional — a sudden attendance drop flags to the school, a placement instability pattern flags to social services.",
+      "Model training uses data from the platform's PostgreSQL database, processed through Teradata ClearScape's in-database ML functions. No data leaves the database for scoring — privacy by architecture."
+    ],
+    images:["Analytics Dashboard.png","Analytics Risk Overview.png","Analytics Model Management.png","Analytics Anomaly Detection.png"]
   }
 ];
 
@@ -1565,7 +1600,7 @@ let state = { slideIndex: 0, screenIndex: 0 };
 
 const FIXED_LEAD_IDS = ["coordination-reality","standards-assurance","safeguarding-consent","portal-selector"];
 const SELECTABLE_PORTAL_IDS = slides.map(s=>s.id).filter(id=>!FIXED_LEAD_IDS.includes(id));
-const DEFAULT_PORTAL_SELECTION = ["child","parent","teacher","senco","local-authority","navigator"];
+const DEFAULT_PORTAL_SELECTION = ["child","parent","teacher","senco","local-authority","navigator","analytics"];
 let selectedPortalIds = [];
 let activeSlides = [];
 
