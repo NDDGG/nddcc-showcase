@@ -1,0 +1,1874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NDDCC Platform | See What We're Building</title>
+<style>
+  :root{
+    --bg:#f4f7fb;
+    --panel:#ffffff;
+    --panel-soft:#f8fbff;
+    --border:#d9e2f0;
+    --text:#10233f;
+    --muted:#60718f;
+    --nav:#edf2ff;
+    --brand:#5c5ce0;
+    --brand-2:#7a59f0;
+    --ok:#1fa971;
+    --warn:#ef8c19;
+    --risk:#d94d4d;
+    --info:#2b8ae2;
+    --ink:#0d1630;
+    --shadow:0 12px 28px rgba(20,34,66,.08);
+    --radius:18px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif}
+  body{overflow:hidden}
+
+  .app{
+    display:grid;
+    grid-template-columns:260px 1fr;
+    height:100vh;
+  }
+
+  .sidebar{
+    background:#fff;
+    border-right:1px solid var(--border);
+    display:flex;
+    flex-direction:column;
+    min-width:0;
+  }
+
+  .brand{
+    padding:26px 26px 18px;
+    border-bottom:1px solid var(--border);
+  }
+  .brand h1{
+    margin:0;
+    font-size:18px;
+    line-height:1.2;
+    letter-spacing:.01em;
+  }
+  .brand p{
+    margin:8px 0 0;
+    color:var(--muted);
+    font-size:14px;
+  }
+
+  .tour-card{
+    margin:18px 20px 10px;
+    padding:16px;
+    border:1px solid var(--border);
+    border-radius:16px;
+    background:var(--nav);
+  }
+  .tour-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+  }
+  .tour-label{
+    font-size:14px;
+    font-weight:700;
+    color:#243a76;
+  }
+  .btn{
+    border:none;
+    border-radius:999px;
+    background:var(--brand);
+    color:#fff;
+    font-weight:700;
+    padding:10px 16px;
+    cursor:pointer;
+    box-shadow:none;
+  }
+  .btn.secondary{
+    background:#fff;
+    color:#33476a;
+    border:1px solid var(--border);
+  }
+  .btn.ghost{
+    background:transparent;
+    color:#33476a;
+    border:1px solid var(--border);
+  }
+
+  .nav{
+    overflow:auto;
+    padding:8px 14px 24px;
+  }
+  .nav-group{
+    margin-top:12px;
+  }
+  .nav-group-title{
+    font-size:12px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:#7e8cab;
+    font-weight:800;
+    padding:14px 14px 8px;
+    border-top:1px solid #edf1f8;
+  }
+  .nav-item{
+    width:100%;
+    text-align:left;
+    background:transparent;
+    border:none;
+    border-radius:10px;
+    padding:8px 12px;
+    color:#314666;
+    font-size:13px;
+    cursor:pointer;
+    margin-bottom:2px;
+    position:relative;
+  }
+  .nav-item:hover{background:#f5f7ff}
+  .nav-item.active{
+    background:#eef1ff;
+    color:#293fbf;
+    font-weight:700;
+  }
+  .nav-item.active::before{
+    content:"";
+    position:absolute;
+    left:0;top:8px;bottom:8px;
+    width:4px;border-radius:999px;
+    background:var(--brand);
+  }
+
+  .main{
+    min-width:0;
+    height:100vh;
+    overflow:auto;
+  }
+  .page{
+    min-height:100%;
+    display:flex;
+    flex-direction:column;
+  }
+
+  .hero{
+    background:linear-gradient(180deg,#fff 0%,#f8fbff 100%);
+    border-bottom:1px solid var(--border);
+    padding:16px 24px 14px;
+  }
+  .hero-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:20px;
+  }
+  .hero h2{
+    margin:0;
+    font-size:20px;
+    line-height:1.15;
+  }
+  .hero p{
+    margin:6px 0 0;
+    color:var(--muted);
+    font-size:14px;
+    max-width:980px;
+  }
+  .pill{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:10px 14px;
+    background:#eef1ff;
+    color:#3d42c8;
+    font-size:14px;
+    border-radius:999px;
+    font-weight:700;
+    white-space:nowrap;
+  }
+  .tag-row{
+    margin-top:8px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+  }
+  .tag{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    border:1px solid var(--border);
+    background:#fff;
+    color:#3d4d6b;
+    padding:5px 10px;
+    border-radius:999px;
+    font-size:12px;
+  }
+  .tag::before{
+    content:"•";
+    color:#2cb56f;
+    font-size:16px;
+    line-height:1;
+  }
+
+  .content{
+    padding:0 20px 16px;
+  }
+  .content-grid{
+    display:grid;
+    grid-template-columns:minmax(0,1.2fr) minmax(300px,1fr);
+    gap:18px;
+    align-items:start;
+  }
+
+  .visual-card{
+    margin-top:0;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:0 0 var(--radius) var(--radius);
+    overflow:hidden;
+    box-shadow:var(--shadow);
+  }
+  .visual-shell{
+    padding:12px 12px 8px;
+  }
+  .visual-stage{
+    width:100%;
+    padding:0;
+    margin:0;
+    border-radius:16px;
+    border:2px dashed #d3dced;
+    background:#f5f8ff;
+    overflow:hidden;
+  }
+  .visual-stage img{
+    display:block;
+    width:100%;
+    height:auto;
+    margin:0;
+    vertical-align:top;
+  }
+  .visual-caption{
+    margin-top:8px;
+    text-align:right;
+    color:#8291af;
+    font-size:13px;
+  }
+  .thumb-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    margin-top:8px;
+  }
+  .thumb{
+    width:12px;height:12px;border-radius:999px;border:none;
+    background:#cbd5ea;cursor:pointer;
+  }
+  .thumb.active{background:var(--brand)}
+  .thumb-labels{
+    display:flex;gap:6px;flex-wrap:wrap;margin-top:8px
+  }
+  .thumb-label{
+    border:1px solid var(--border);
+    background:#fff;
+    color:#506281;
+    border-radius:999px;
+    padding:5px 10px;
+    font-size:11px;
+    cursor:pointer;
+  }
+  .thumb-label.active{
+    background:#eef1ff;
+    border-color:#c9cffd;
+    color:#3948c8;
+    font-weight:700;
+  }
+
+  .narrative-col{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    padding-top:0;
+    overflow-y:auto;
+    scrollbar-gutter:stable;
+  }
+  .narrative-col::-webkit-scrollbar{width:10px;height:10px}
+  .narrative-col::-webkit-scrollbar-thumb{background:#c8d3e6;border-radius:999px;border:3px solid transparent;background-clip:content-box}
+  .narrative-col::-webkit-scrollbar-track{background:transparent}
+  .card{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:14px 14px 12px;
+    box-shadow:var(--shadow);
+    flex-shrink:0;
+  }
+  #benefitCard {
+    border-left: 4px solid var(--ok);
+    background: linear-gradient(90deg, #f0faf5 0%, #fff 40%);
+  }
+  #connectCard {
+    border-left: 4px solid var(--info);
+    background: linear-gradient(90deg, #f0f6ff 0%, #fff 40%);
+  }
+  .eyebrow{
+    margin:0 0 6px;
+    color:#7f8dab;
+    font-size:12px;
+    letter-spacing:.09em;
+    text-transform:uppercase;
+    font-weight:800;
+  }
+  .card h3{
+    margin:0 0 6px;
+    font-size:17px;
+    line-height:1.15;
+  }
+  .card p{
+    margin:0;
+    color:#435570;
+    font-size:13px;
+    line-height:1.5;
+  }
+  .bullets{
+    margin:0;
+    padding-left:16px;
+    color:#334664;
+    display:grid;
+    gap:5px;
+    font-size:13px;
+    line-height:1.4;
+  }
+  .screens-list{
+    margin:0;
+    padding-left:18px;
+    display:grid;
+    gap:4px;
+    color:#334664;
+    font-size:13px;
+  }
+
+  .nav-controls{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+  }
+  .screen-count{
+    color:#5f6f8d;
+    font-size:14px;
+  }
+  .control-btn{
+    min-width:80px;
+    padding:7px 12px;
+    border-radius:10px;
+    border:1px solid var(--border);
+    background:#fff;
+    cursor:pointer;
+    font-weight:700;
+    font-size:12px;
+    color:#24395f;
+  }
+
+  /* infographic styles */
+  .infographic{
+    padding:22px;
+    display:grid;
+    gap:18px;
+  }
+  .metric-grid{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:14px;
+  }
+  .metric{
+    border:1px solid var(--border);
+    border-radius:16px;
+    background:linear-gradient(180deg,#fff 0%,#f8fbff 100%);
+    padding:16px;
+  }
+  .metric .kicker{
+    color:#8090ac;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    font-weight:800;
+  }
+  .metric .value{
+    margin-top:8px;
+    font-size:34px;
+    line-height:1;
+    font-weight:800;
+  }
+  .metric .desc{
+    margin-top:8px;
+    color:#5b6d89;
+    font-size:14px;
+    line-height:1.4;
+  }
+
+  .diagram{
+    border:1px solid var(--border);
+    border-radius:18px;
+    background:#fff;
+    padding:18px;
+  }
+  .diagram h4{
+    margin:0 0 14px;
+    font-size:18px;
+  }
+  .flow-grid{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:14px;
+    align-items:stretch;
+  }
+  .flow-box{
+    border-radius:16px;
+    padding:16px;
+    color:#fff;
+    min-height:128px;
+  }
+  .flow-box h5{
+    margin:0 0 10px;
+    font-size:16px;
+  }
+  .flow-box p{
+    margin:0;
+    color:rgba(255,255,255,.92);
+    font-size:14px;
+    line-height:1.45;
+  }
+  .f1{background:linear-gradient(135deg,#4057d6,#6e72ff)}
+  .f2{background:linear-gradient(135deg,#2f8ae6,#44b5ff)}
+  .f3{background:linear-gradient(135deg,#1fa971,#3ac58f)}
+  .f4{background:linear-gradient(135deg,#7b59f0,#9e7dff)}
+  .f5{background:linear-gradient(135deg,#ef8c19,#ffaf3f)}
+  .f6{background:linear-gradient(135deg,#cc4f4f,#f26e6e)}
+
+  .two-col{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    gap:14px;
+  }
+  .stack-note{
+    border-left:4px solid var(--brand);
+    background:#f7f8ff;
+    padding:14px 14px 14px 16px;
+    border-radius:14px;
+    color:#334664;
+    font-size:15px;
+    line-height:1.5;
+  }
+  .mini-list{
+    margin:0;
+    padding-left:18px;
+    display:grid;
+    gap:6px;
+    color:#334664;
+    font-size:14px;
+    line-height:1.45;
+  }
+  .assure-grid{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:14px;
+  }
+  .assure-box{
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:16px;
+    background:#fff;
+  }
+  .assure-box h5{
+    margin:0 0 8px;
+    font-size:16px;
+  }
+  .assure-box p{
+    margin:0;
+    color:#51637f;
+    font-size:14px;
+    line-height:1.45;
+  }
+
+  .footer-bar{
+    position:sticky;
+    bottom:0;
+    z-index:5;
+    margin-top:auto;
+    background:rgba(255,255,255,.94);
+    backdrop-filter:blur(10px);
+    border-top:1px solid var(--border);
+    padding:6px 18px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+  }
+  .footer-left,.footer-right{
+    display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  }
+  .tiny{
+    font-size:13px;color:#6f809f;
+  }
+
+  .status-dot{
+    width:10px;height:10px;border-radius:999px;background:var(--ok);display:inline-block;margin-right:8px
+  }
+
+  @media (max-width: 1220px){
+    .content-grid{grid-template-columns:1fr}
+    .narrative-col{padding-top:0}
+  }
+  @media (max-width: 980px){
+    .app{grid-template-columns:1fr}
+    .sidebar{display:none}
+    body{overflow:auto}
+    .main{height:auto;overflow:visible}
+    .metric-grid,.flow-grid,.assure-grid,.two-col{grid-template-columns:1fr}
+    .footer-bar{position:static}
+  }
+
+  .sidebar{min-height:0}
+  .nav{scrollbar-gutter:stable;overscroll-behavior:contain}
+  .nav::-webkit-scrollbar,.visual-stage::-webkit-scrollbar,.right-pane::-webkit-scrollbar{width:12px;height:12px}
+  .nav::-webkit-scrollbar-thumb,.visual-stage::-webkit-scrollbar-thumb,.right-pane::-webkit-scrollbar-thumb{background:#c8d3e6;border-radius:999px;border:3px solid transparent;background-clip:content-box}
+  .nav::-webkit-scrollbar-track,.visual-stage::-webkit-scrollbar-track,.right-pane::-webkit-scrollbar-track{background:transparent}
+  .main{overflow:hidden}
+  .page{height:100vh;min-height:0}
+  .content{flex:1;min-height:0;overflow:hidden}
+  .content-grid{height:100%;min-height:0;align-items:stretch}
+  .visual-card{height:100%;display:flex;flex-direction:column}
+  .visual-shell{height:100%;display:flex;flex-direction:column;min-height:0}
+  .visual-stage{flex:1;min-height:0;overflow:auto;scrollbar-gutter:stable;display:flex;align-items:flex-start;justify-content:center}
+  .visual-stage img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
+  .selector-wrap{height:100%;overflow:auto;padding:22px;scrollbar-gutter:stable}
+  .selector-toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:18px}
+  .selector-toolbar button,.selector-actions button{border:1px solid var(--border);background:#fff;border-radius:12px;padding:10px 14px;font-weight:700;color:#33476a;cursor:pointer}
+  .selector-toolbar button.primary,.selector-actions button.primary{background:var(--brand);border-color:var(--brand);color:#fff}
+  .selector-toolbar .summary{color:#5f6f8d;font-size:14px;font-weight:700}
+  .selector-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:18px}
+  .selector-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:16px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px;cursor:pointer;user-select:none;transition:border-color .15s ease, box-shadow .15s ease, transform .15s ease}
+  .selector-card.selected{background:#f7f9ff;border-color:#b8c2ff;box-shadow:0 10px 24px rgba(61,66,200,.10)}
+  .selector-card:hover{border-color:#b8c2ff;transform:translateY(-1px)}
+  .selector-card label{display:flex;gap:12px;align-items:flex-start;cursor:pointer}
+  .selector-card input{margin-top:4px}
+  .selector-card h3{margin:0;font-size:18px;line-height:1.2}
+  .selector-card p{margin:0;color:#435570;font-size:14px;line-height:1.5}
+  .selector-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto}
+  .selector-tag{border:1px solid var(--border);background:#eef1ff;color:#3948c8;border-radius:999px;padding:7px 12px;font-size:12px;font-weight:700}
+  .selector-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+  .control-btn:disabled,.btn:disabled{opacity:.55;cursor:not-allowed}
+  @media (max-width: 980px){
+    .selector-grid{grid-template-columns:1fr}
+    .main{overflow:auto}
+    .page{height:auto}
+    .content{overflow:visible}
+    .content-grid{height:auto}
+    .visual-card,.visual-shell,.visual-stage{height:auto;max-height:none}
+  }
+
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <h1>NDDCC Platform</h1>
+      <p>See what we're building for children, families, and the professionals who support them</p>
+    </div>
+    <nav class="nav" id="sidebarNav"></nav>
+  </aside>
+
+  <main class="main">
+    <div class="page">
+      <section class="hero">
+        <div class="hero-top">
+          <div>
+            <h2 id="heroTitle">NDDCC Showcase</h2>
+            <p id="heroSubtitle"></p>
+          </div>
+          <div class="pill" id="heroPill">Platform overview</div>
+        </div>
+        <div class="tag-row" id="heroTags"></div>
+      </section>
+
+      <section class="content">
+        <div class="content-grid">
+          <div class="visual-card">
+            <div class="visual-shell">
+              <div class="visual-stage" id="visualStage"></div>
+              <div class="visual-caption" id="visualCaption"></div>
+              <div class="thumb-labels" id="thumbLabels"></div>
+              <div class="thumb-row" id="thumbDots"></div>
+            </div>
+          </div>
+
+          <div class="narrative-col">
+            <div class="card">
+              <div class="eyebrow">Executive narrative</div>
+              <h3 id="narrativeTitle"></h3>
+              <p id="narrativeText"></p>
+            </div>
+
+            <div class="card" id="benefitCard">
+              <div class="eyebrow">What this means for you</div>
+              <p id="benefitText" style="color:#2d3e58;line-height:1.6;font-weight:600"></p>
+            </div>
+
+            <div class="card" id="connectCard">
+              <div class="eyebrow">How it connects</div>
+              <p id="connectText" style="color:#435570;line-height:1.6"></p>
+            </div>
+
+            <div class="card">
+              <div class="eyebrow">Why it matters</div>
+              <ul class="bullets" id="whyList"></ul>
+            </div>
+
+            <div class="card">
+              <div class="eyebrow">Screens in this slide</div>
+              <ol class="screens-list" id="screensList"></ol>
+            </div>
+
+            <div class="card">
+              <div class="nav-controls">
+                <button class="control-btn" id="prevScreenBtn">Previous screen</button>
+                <div class="screen-count" id="screenCount"></div>
+                <button class="control-btn" id="nextScreenBtn">Next screen</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="footer-bar">
+        <div class="footer-left">
+          <span class="tiny"><span class="status-dot"></span>NDDCC Platform Showcase</span>
+          <span class="tiny" id="pathHint">Built with care in the UK</span>
+        </div>
+        <div class="footer-right">
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+const imageRoots = ["", "./", "./Final Pic Set/", "./images/", "./assets/"];
+
+const imageAliases = {
+  "Parent Document Library png.png": [
+    "Parent Document Library.png",
+    "Parent DocumentLibrary.png",
+    "Parent Document library.png",
+    "ParentDocumentLibrary.png",
+    "Parent Document Library .png",
+    "Parent_DocumentLibrary.png",
+    "Parent Document Library png.png"
+  ],
+  "Child in Care My Safety Plan.png": [
+    "Child in Care My Safety Planning.png",
+    "Child in Care Safety Plan.png",
+    "ChildInCareMySafetyPlan.png"
+  ],
+  "Teacher My Student Communications.png": [
+    "Teacher My Student Communication.png",
+    "Teacher My Student Comms.png",
+    "TeacherMyStudentCommunication.png"
+  ],
+  "Senco Assesments.png": [
+    "Senco Assessments.png",
+    "SENCO Assessments.png",
+    "Senco Assessment.png",
+    "SENCO Assessment.png",
+    "Senco Assesments.png"
+  ],
+  "Senco New Assesments.png": [
+    "Senco New Assessments.png",
+    "SENCO New Assessments.png",
+    "Senco New Assessment.png",
+    "SENCO New Assessment.png",
+    "Senco New Assesments.png"
+  ],
+  "Senco Messeges.png": [
+    "Senco Messages.png",
+    "SENCO Messages.png",
+    "Senco Message.png",
+    "SENCO Message.png",
+    "Senco Messeges.png"
+  ],
+  "Senco WorkFlows.png": [
+    "Senco Workflows.png",
+    "SENCO Workflows.png",
+    "Senco WorkFlows.png"
+  ],
+  "Parent Document Library png.png": [
+    "Parent DocumentLibrary.png",
+    "Parent Document library.png",
+    "ParentDocumentLibrary.png",
+    "Parent Document Library .png",
+    "Parent_DocumentLibrary.png",
+    "Parent Document Library png.png"
+  ],
+  "Child in Care My Safety Plan.png": [
+    "Child in Care My Safety Plan.png",
+    "Child in Care Safety Plan.png",
+    "ChildInCareMySafetyPlan.png"
+  ],
+  "School Portal TimeTable.png": [
+    "School Portal Timetable.png",
+    "School Portal Time Table.png"
+  ],
+  "LA Assessments 1.png": [
+    "LA Assessments.png",
+    "LA Assessments1.png"
+  ],
+  "LA Funding 2.png": [
+    "LA Funding.png",
+    "LA Funding2.png"
+  ],
+  "Teacher Communication.png": [
+    "Teacher Communications.png",
+    "Teacher Message.png",
+    "Teacher Messages.png"
+  ],
+  "Teacher Assessments.png": [
+    "Teacher Assessment.png",
+    "Teacher_Assessment.png",
+    "Teacher Assessments .png",
+    "Teacher Assessments.PNG"
+  ],
+  "Teacher My Student Communications.png": [
+    "Teacher My Student Communications.png",
+    "Teacher My Student Comms.png",
+    "TeacherMyStudentCommunication.png"
+  ],
+  "Social Services Placements.png": [
+    "Social Services Placement Planning.png"
+  ],
+  "Senco Assesments.png": [
+    "SENCO Assessments.png",
+    "Senco Assessment.png",
+    "SENCO Assessment.png",
+    "Senco Assesments.png"
+  ],
+  "Senco New Assesments.png": [
+    "SENCO New Assessments.png",
+    "Senco New Assessment.png",
+    "SENCO New Assessment.png",
+    "Senco New Assesments.png"
+  ],
+  "Senco Messeges.png": [
+    "SENCO Messages.png",
+    "Senco Message.png",
+    "SENCO Message.png",
+    "Senco Messeges.png"
+  ],
+  "Senco Resources.png": [
+    "SENCO Resources.png"
+  ],
+  "Senco WorkFlows.png": [
+    "SENCO Workflows.png",
+    "Senco WorkFlows.png"
+  ],
+  "Senco Dashboard.png": [
+    "SENCO Dashboard.png"
+  ],
+  "Senco DPO.png": [
+    "SENCO DPO.png"
+  ],
+  "Senco EHCP Management.png": [
+    "SENCO EHCP Management.png"
+  ],
+  "Senco Graduated Approach Tracker.png": [
+    "SENCO Graduated Approach Tracker.png"
+  ],
+  "Senco Reports 1.png": [
+    "SENCO Reports 1.png"
+  ],
+  "Senco Reports 2.png": [
+    "SENCO Reports 2.png"
+  ]
+};
+
+function expandVariants(name){
+  const names = new Set();
+  names.add(name);
+  names.add(name.replace(/ /g, "%20"));
+  names.add(name.replace(/ /g, "_"));
+  names.add(name.replace(/_/g, " "));
+  names.add(name.replace(/-/g, " "));
+  names.add(name.replace(/\s+/g, ""));
+  names.add(name.replace(/ /g, "-"));
+  names.add(name.replace(/([a-z])([A-Z])/g, "$1 $2"));
+  names.add(name.replace(/([a-z])([A-Z])/g, "$1_$2"));
+  return [...names];
+}
+
+function buildCandidates(files){
+  const out = [];
+  files.forEach(file=>{
+    const pool = new Set([file, ...(imageAliases[file] || [])]);
+    [...pool].forEach(base=>{
+      expandVariants(base).forEach(v=>{
+        imageRoots.forEach(root=> out.push(root + v));
+      });
+    });
+  });
+  return [...new Set(out)];
+}
+
+function findWorkingImage(candidates){
+  return new Promise((resolve)=>{
+    let idx = 0;
+    function tryNext(){
+      if(idx >= candidates.length){ resolve(null); return; }
+      const src = candidates[idx++];
+      const img = new Image();
+      img.onload = ()=> resolve(src);
+      img.onerror = ()=> tryNext();
+      img.src = src;
+    }
+    tryNext();
+  });
+}
+
+const slides = [
+  {
+    id:"coordination-reality",
+    group:"The Problem",
+    title:"Why Families Feel Lost in the System",
+    subtitle:"Children with additional needs are supported by many people — but those people rarely share a joined-up picture. Information gets stuck, families repeat themselves, and support arrives late.",
+    pill:"The problem",
+    tags:["Fragmented support","Repeated stories","Delayed action","Family burden"],
+    narrativeTitle:"The problem is not a lack of care. It is a lack of connection.",
+    narrativeText:"A child with SEND might have a teacher, a SENCO, a parent, a social worker, a therapist, and an LA case officer — all working hard, all in separate systems. The parent ends up being the one who joins it all together, carrying paperwork between meetings and repeating the same story to every new professional. NDDCC exists to fix that.",
+    why:[
+      "Parents should not have to be the system integrator for their own child’s support.",
+      "Teachers should know what support is in place before the school day starts, not after a meeting next month.",
+      "Social workers should see a child’s full picture — school, care, health — without requesting it from three different teams.",
+      "Children deserve continuity. When they move school, change placement, or transition between services, their story should move with them."
+    ],
+    screens:["The reality today","What breaks","What NDDCC changes"],
+    mode:"infographic",
+    render:()=>`
+      <div class="infographic">
+        <div class="metric-grid">
+          <div class="metric"><div class="kicker">Services involved</div><div class="value">5+</div><div class="desc">A single child can have relevant information held across five or more separate teams — none of them seeing the full picture.</div></div>
+          <div class="metric"><div class="kicker">Family experience</div><div class="value">Repeated</div><div class="desc">Parents and carers tell the same story to every new professional. Meeting after meeting, form after form.</div></div>
+          <div class="metric"><div class="kicker">Hidden risk</div><div class="value">Invisible</div><div class="desc">When a concern is raised in one service, the others may not hear about it for days or weeks.</div></div>
+          <div class="metric"><div class="kicker">Support delays</div><div class="value">Weeks</div><div class="desc">Action slows when every professional has to rebuild the child’s context from scratch before they can help.</div></div>
+        </div>
+        <div class="diagram">
+          <h4>How support works today</h4>
+          <div class="flow-grid">
+            <div class="flow-box f1"><h5>Child & Family</h5><p>Experience support as disconnected conversations. Carry the burden of joining it all up.</p></div>
+            <div class="flow-box f2"><h5>School & Teachers</h5><p>Track attendance, behaviour, learning, and SEND locally — often without seeing the care picture.</p></div>
+            <div class="flow-box f3"><h5>Care & Social Services</h5><p>Manage placements, reviews, and safeguarding in their own systems — often without seeing the school picture.</p></div>
+            <div class="flow-box f4"><h5>Local Authority</h5><p>Oversee statutory cases, funding, and compliance — often without real-time visibility of what’s happening on the ground.</p></div>
+          </div>
+        </div>
+        <div class="two-col">
+          <div class="diagram">
+            <h4>What this costs</h4>
+            <ul class="mini-list">
+              <li>Time spent chasing information instead of supporting the child.</li>
+              <li>Meetings called just to get everyone on the same page.</li>
+              <li>Deadlines missed because no one had clear ownership.</li>
+              <li>Families losing trust because the system feels chaotic.</li>
+            </ul>
+          </div>
+          <div class="diagram">
+            <h4>What NDDCC does differently</h4>
+            <div class="stack-note">NDDCC gives every role — parent, teacher, SENCO, social worker, carer, LA officer — their own portal, connected to a shared platform. The child’s story, consent, actions, and decisions travel between roles automatically. No one has to chase. No one has to repeat themselves.</div>
+          </div>
+        </div>
+        <div class="diagram">
+          <h4>The NDDCC portal estate</h4>
+          <div style="border-radius:12px;overflow:hidden;border:1px solid var(--border);">
+            <img src="AllPortals.png" alt="All 24 NDDCC portals" style="display:block;width:100%;height:auto;">
+          </div>
+          <p style="color:#5b6d89;font-size:14px;margin-top:10px;">24 role-based portals, one governed platform. Explore the ones that matter to you below.</p>
+        </div>
+      </div>`
+  },
+  {
+    id:"standards-assurance",
+    group:"The Platform",
+    title:"What Holds Everything Together",
+    subtitle:"NDDCC is not a collection of separate apps. Every portal sits inside one governed platform with shared identity, security, audit trails, and operational standards.",
+    pill:"Platform architecture",
+    tags:["One platform","Shared standards","Built to scale","Consistent governance"],
+    narrativeTitle:"Different roles, same discipline.",
+    narrativeText:"Whether you are a parent checking your child's progress, a teacher reviewing support strategies, or an LA officer tracking EHCP compliance — you are inside the same platform. That means the same security, the same audit trail, the same consent rules, and the same data quality. This is what makes NDDCC trustworthy at scale.",
+    why:[
+      "Your child's data is protected by the same security model whether it's viewed by a teacher, a social worker, or an LA case officer.",
+      "Every action in the platform is logged — who accessed what, when, and why. Nothing happens invisibly.",
+      "When a new portal is added (for a new role or service), it inherits the same controls automatically. The platform grows without governance gaps.",
+      "Schools, care teams, and local authorities work inside one operating model — reducing the friction of multi-agency coordination."
+    ],
+    screens:["Platform standards","Technical consistency","Operational discipline"],
+    mode:"infographic",
+    render:()=>`
+      <div class="infographic">
+        <div class="assure-grid">
+          <div class="assure-box"><h5>One identity, many roles</h5><p>Every user has one account with role-based access. A parent sees what a parent should see. A social worker sees what a social worker needs. No over-sharing, no under-sharing.</p></div>
+          <div class="assure-box"><h5>Audit everything</h5><p>Every access, every change, every consent decision is recorded. If a question is ever raised about who saw what, the answer is there.</p></div>
+          <div class="assure-box"><h5>Consistent experience</h5><p>Every portal looks and feels like part of the same platform. Role-specific features, shared design language, familiar navigation.</p></div>
+          <div class="assure-box"><h5>Secure by design</h5><p>Data moves through controlled pathways — not email attachments, not USB sticks, not verbal handoffs. The platform handles it.</p></div>
+          <div class="assure-box"><h5>Ready for integration</h5><p>Built for structured data exchange with existing systems. NDDCC does not demand you rip and replace — it connects and coordinates.</p></div>
+          <div class="assure-box"><h5>Operated, not just deployed</h5><p>Monitoring, quarantine, audit, and reporting views mean the platform can be actively managed — not just switched on and hoped for the best.</p></div>
+        </div>
+        <div class="diagram">
+          <h4>What every portal inherits</h4>
+          <div class="flow-grid">
+            <div class="flow-box f1"><h5>Identity & Access</h5><p>Role-scoped permissions, secure login, and session management that works the same everywhere.</p></div>
+            <div class="flow-box f2"><h5>Security & Privacy</h5><p>Data boundaries, consent enforcement, and controlled routing — so information goes where it should and nowhere else.</p></div>
+            <div class="flow-box f3"><h5>Governance & Audit</h5><p>Every action is traceable. Every decision is accountable. Every access is recorded.</p></div>
+            <div class="flow-box f4"><h5>Operations & Monitoring</h5><p>Platform health, service status, and issue detection — so problems are caught before they affect users.</p></div>
+          </div>
+        </div>
+        <div class="two-col">
+          <div class="diagram">
+            <h4>Why this matters for you</h4>
+            <ul class="mini-list">
+              <li>If you are a parent: your child's data is handled with the same care everywhere in the system.</li>
+              <li>If you are a teacher: the tools you use are reliable, consistent, and secure.</li>
+              <li>If you are evaluating the platform: it scales without losing governance.</li>
+            </ul>
+          </div>
+          <div class="diagram">
+            <h4>Built to grow</h4>
+            <div class="stack-note">NDDCC can start with a handful of portals for one local authority and grow to cover an entire region — without rebuilding, without re-architecting, without losing the controls that make it trustworthy.</div>
+          </div>
+        </div>
+      </div>`
+  },
+  {
+    id:"safeguarding-consent",
+    group:"Trust & Safety",
+    title:"How We Keep Children Safe",
+    subtitle:"Sharing information between professionals saves lives. But it has to be done with consent, transparency, and accountability. NDDCC makes both possible at the same time.",
+    pill:"Trust & safety",
+    tags:["Consent-first","Fail-closed access","Safeguarding built in","Transparent sharing"],
+    narrativeTitle:"Information sharing should protect children, not put them at risk.",
+    narrativeText:"The hardest challenge in multi-agency work is sharing enough information to help, without sharing so much that trust breaks down. NDDCC solves this by making consent visible, granular, and active. Parents can see who has access to what. Professionals can see what they're allowed to act on. And when a safeguarding concern is raised, the system makes sure it reaches the right people — fast.",
+    why:[
+      "Parents and carers can see exactly what information is being shared, with whom, and for what purpose — at any time, from their portal.",
+      "Access is fail-closed: if a professional doesn't have the right permission, the system denies access rather than guessing. Safety over convenience.",
+      "When a safeguarding concern is flagged — by a teacher, a foster carer, or a social worker — it surfaces immediately in the relevant portals. No emails to chase, no voicemails to leave.",
+      "Every sharing decision is logged and auditable. If a question is ever raised about information handling, the full history is available."
+    ],
+    screens:["How consent works","How safeguarding moves","Why this matters"],
+    mode:"infographic",
+    render:()=>`
+      <div class="infographic">
+        <div class="metric-grid">
+          <div class="metric"><div class="kicker">Consent model</div><div class="value">Visible</div><div class="desc">Parents and young people can see sharing decisions, review who has access, and understand why information is being shared.</div></div>
+          <div class="metric"><div class="kicker">Access default</div><div class="value">Denied</div><div class="desc">If consent hasn't been granted or the role doesn't have permission, the system says no. Not maybe. No.</div></div>
+          <div class="metric"><div class="kicker">Safeguarding</div><div class="value">Instant</div><div class="desc">When a concern is raised in any portal, it surfaces in the relevant safeguarding views immediately. No delay, no manual forwarding.</div></div>
+          <div class="metric"><div class="kicker">Accountability</div><div class="value">Complete</div><div class="desc">Every access, every share, every consent change is recorded with who, what, when, and why. Nothing is invisible.</div></div>
+        </div>
+        <div class="diagram">
+          <h4>How information flows safely</h4>
+          <div class="flow-grid">
+            <div class="flow-box f5"><h5>Parent / Young Person</h5><p>Grants or reviews consent. Sees who has access. Understands why information is being shared.</p></div>
+            <div class="flow-box f2"><h5>Teacher / School</h5><p>Sees the support context they need for their role. Raises concerns when something isn't right.</p></div>
+            <div class="flow-box f6"><h5>Safeguarding</h5><p>Concerns surface instantly in the right places. Actions are tracked. Nothing falls between the cracks.</p></div>
+            <div class="flow-box f4"><h5>Oversight & Audit</h5><p>Every decision is reviewable. Every action is accountable. The full picture is always available.</p></div>
+          </div>
+        </div>
+        <div class="two-col">
+          <div class="diagram">
+            <h4>For families</h4>
+            <div class="stack-note">You stay in control. You can see who has access to your child's information, why they have it, and what they've done with it. If you want to change a sharing decision, you can — from your portal, at any time.</div>
+          </div>
+          <div class="diagram">
+            <h4>For professionals</h4>
+            <div class="stack-note">You can share information confidently because the platform handles consent, logging, and boundaries for you. When you raise a concern, it reaches the right people immediately. When you need to justify an access decision, the audit trail is there.</div>
+          </div>
+        </div>
+      </div>`
+  },
+
+  {
+    id:"portal-selector",
+    group:"Explore",
+    title:"Explore the Platform",
+    subtitle:"Choose a starting point based on your role, or pick individual portals to explore. Every portal is designed for a specific person in the child's support network.",
+    pill:"Choose your view",
+    tags:["Role-based views","Parent","Teacher","Social care","Leadership","Full platform"],
+    narrativeTitle:"Start with what matters to you",
+    narrativeText:"NDDCC has portals for every role in a child's support network. You don't need to see all of them — start with the ones closest to your experience. If you're a parent, see what your portal looks like. If you're a teacher, see how classroom support works. If you're evaluating the whole platform, select everything.",
+    why:[
+      "Each portal is designed for a specific role — not a one-size-fits-all dashboard.",
+      "Pick your role to see the portals most relevant to you, or explore freely.",
+      "The platform connects these portals behind the scenes — what you do in one portal can be visible in another.",
+      "You can change your selection at any time by coming back to this page."
+    ],
+    screens:["Choose your role or select individual portals"],
+    mode:"selector"
+  },
+  {
+    id:"child",
+    group:"Direct Experience",
+    title:"Child Portal",
+    subtitle:"A warm, strengths-based space where children track their feelings, celebrate achievements, and engage with learning at their own pace.",
+    pill:"Direct experience",
+    tags:["Child voice","Daily check-ins","Strengths-based","Gamified learning"],
+    narrativeTitle:"This is your space",
+    narrativeText:"Everything here is designed for you. You can check in with how you’re feeling, keep track of your learning streak, earn badges for things you’re great at, and take on daily challenges. Your grown-ups can see how you’re doing — but this is your space to explore and grow.",
+    why:[
+      "Your mood check-in (‘How I’m Feeling Today’) helps the people around you understand how you’re doing — without you having to explain it every time.",
+      "My Journey shows your badges and skills — the things you’re good at, not just the things that are hard.",
+      "The Learning Center lets you pick your own activities, track your progress, and earn rewards for effort.",
+      "Your achievements are celebrated here — completed modules, learning streaks, creative work. It all counts."
+    ],
+    screens:[
+      "Dashboard — mood, progress, streak, achievements",
+      "My Journey — level 7, badges, skills, milestones",
+      "Learning Center — daily challenge, activities, rewards"
+    ],
+    benefits:[
+      "Everything in one place: how you’re feeling, what you’ve achieved, and what to do next. This is your home in the platform.",
+      "Your strengths front and centre. Badges, skills, milestones — this page shows what you’re great at and how far you’ve come.",
+      "Pick a challenge, track your progress, earn rewards. Learning feels like something you choose, not something that happens to you."
+    ],
+    connections:[
+      "Your mood check-in is shared with your support team — your teacher, your SENCO, or your social worker — so they know how you’re doing without you having to say it every time.",
+      "Your badge and skill progress is visible to your teacher and parent portals, so everyone can celebrate your wins together.",
+      "When you complete activities here, your teacher can see your progress in their portal. Your parent can see it in theirs. Everyone stays connected."
+    ],
+    images:["Child Dashboard.png","Child Journey.png","Child Learning.png"]
+  },
+  {
+    id:"child-in-care",
+    group:"Direct Experience",
+    title:"Child in Care Portal",
+    subtitle:"A safe digital space for looked-after children — with emotional check-ins, journaling, support circles, and a visible safety plan.",
+    pill:"Direct experience",
+    tags:["Looked-after child","Emotional safety","Support visibility","Safety planning"],
+    narrativeTitle:"Your safe space",
+    narrativeText:"If you’re in care, this is your corner of the platform. You can check in with how you’re feeling, write in your journal, see who’s in your support circle, and access your safety plan whenever you need it. The people who care about you can see what you choose to share — but this space belongs to you.",
+    why:[
+      "The mood check-in lets you express how you’re feeling each day. Your care team can see it, so they can support you better — without you having to explain it over and over.",
+      "My Circle shows you who your trusted adults are — your social worker, your foster carer, your teacher. You can see them all in one place.",
+      "Your journal is private unless you choose to share it. It’s a place to write about your feelings, your day, whatever matters to you.",
+      "Your Safety Plan is always one tap away. You can see it, understand it, and know it’s up to date. And if you ever need help right now, the Emergency Resources button is always there."
+    ],
+    screens:[
+      "Dashboard — check-in, safety plan, achievements",
+      "My Circle — support network visibility",
+      "My Journal — private expression space",
+      "My Journey — progress and milestones",
+      "My Safety Plan — active safety planning"
+    ],
+    benefits:[
+      "Your dashboard shows everything that matters: how you’re feeling, your achievements, and your safety plan — always accessible, always yours.",
+      "See all the people who are here for you in one place. No confusion about who to reach out to.",
+      "A private space to write. Nobody reads this unless you say so. It’s yours.",
+      "Track your progress and milestones — even when other things in life are changing, your achievements stay with you.",
+      "Your safety plan, in your hands. You can read it, understand it, and know exactly what to do if you need help."
+    ],
+    connections:[
+      "Your mood check-in is visible to your social worker (in their portal) and your foster carer (in theirs) — so they can support you without you having to repeat yourself.",
+      "Your support circle connects to the professionals who have access to your case — your social worker, foster carer, and SENCO all see their role in your network.",
+      "If you choose to share a journal entry, it appears in your social worker’s case view — giving them insight into how you’re really doing.",
+      "Your milestones and achievements are shared with your care team and school, so everyone can recognise your progress.",
+      "Your safety plan is also visible to your social worker and foster carer — they can see it’s up to date and act quickly if you need help."
+    ],
+    images:["Child in Care Dashboard.png","Child in Care My Circle.png","Child in Care My Journal.png","Child in Care My Journey.png","Child in Care My Safety Plan.png"]
+  },
+  {
+    id:"parent",
+    group:"Family Coordination",
+    title:"Parent Portal",
+    subtitle:"One place to see your child’s journey, prepare for meetings, track progress, manage consent, and stay connected with school.",
+    pill:"Family coordination",
+    tags:["Family visibility","Meeting prep","Consent control","Progress insight"],
+    narrativeTitle:"You shouldn’t have to chase the system",
+    narrativeText:"As a parent or carer, you’ve probably spent hours chasing emails, requesting updates, and turning up to meetings without knowing what’s been happening. This portal changes that. Your child’s journey, progress, documents, school updates, and consent settings — all in one place, always up to date.",
+    why:[
+      "Meeting Preparation gives you guided questionnaires before Annual Reviews, EHCP Meetings, IEP Meetings, and Parents Evenings — so you arrive prepared, not blindsided.",
+      "The Consent Manager shows you exactly who has access to your child’s information, why, and for what purpose. You can change sharing decisions any time.",
+      "Progress Tracking shows the same data your child’s teacher and SENCO are working with — curriculum areas, skills, goals, achievements. No more surprises.",
+      "Class Story keeps you connected to daily classroom life — photos, updates, announcements. Not just end-of-term reports.",
+      "The Document Library holds policies, SEND resources, and your child’s individual documents. No more chasing PDFs."
+    ],
+    screens:[
+      "Dashboard — journey, events, meetings, consent",
+      "Document Library — policies, resources, child docs",
+      "Learning Observations — photos and notes",
+      "Consent Management — active sharing control",
+      "Progress Tracking — curriculum and skills",
+      "Progress Tracking (continued)",
+      "Class Feed — classroom updates and photos"
+    ],
+    benefits:[
+      "Everything about your child, in one place. Upcoming events, messages, meeting prep, progress, documents, consent. No more chasing.",
+      "School policies, SEND resources, and your child’s documents — all accessible whenever you need them. No more waiting for emails.",
+      "Upload photos or notes about your child’s learning at home. School sees them too — this is two-way communication, not just top-down updates.",
+      "You control who sees your child’s information. This is GDPR made real — not a checkbox at registration, but an ongoing, visible control you can change any time.",
+      "See exactly what school sees: curriculum progress, skills, goals, achievements. Have an informed conversation at parents evening, not a surprised one.",
+      "Detailed progress tracking — where your child is thriving and where they might need more support.",
+      "Live updates from the classroom — what your child did today, photos from activities, announcements. Feel connected to their school day."
+    ],
+    connections:[
+      "Your dashboard pulls in data from the teacher portal (class updates), the SENCO portal (assessment and review dates), and the school portal (events and announcements).",
+      "Documents shared with you come through the Navigator portal’s routing engine — governed, tracked, and consent-aware.",
+      "Observations you upload here are visible in the teacher portal, giving teachers a home-school learning picture.",
+      "Your consent decisions are enforced across the entire platform. When you change a sharing permission here, it takes effect in every portal that touches your child’s data.",
+      "Progress data flows from the teacher portal (assessment records) and the SENCO portal (graduated approach tracking) into your view.",
+      "Same data, continued — this connects directly to the SENCO’s provision tracking and the school’s reporting.",
+      "Class Feed comes from the teacher portal — when a teacher posts an update, you see it here. Two-way connection, one shared story."
+    ],
+    images:["Parent Dashboard.png","Parent Document Library png.png","Parent Observations.png","Parent Progress Consent Management.png","Parent Progress Tracking 1.png","Parent Progress Tracking 2.png","Parent ClassFeed.png"]
+  },
+  {
+    id:"teacher",
+    group:"Education Delivery",
+    title:"Teacher Portal",
+    subtitle:"Which students need attention today, what support strategies are active, and how to coordinate with parents and SENCOs — before the bell rings.",
+    pill:"Education delivery",
+    tags:["Classroom action","SEND visibility","Student strategies","Parent comms"],
+    narrativeTitle:"Support that works at the pace of a classroom",
+    narrativeText:"The teacher portal translates SEND plans and support strategies into daily classroom action. At 8am, you can see which students need attention, what interventions are active, who has a parent meeting coming up, and what assessments are due. This is the bridge between the strategy paper and the lesson plan.",
+    why:[
+      "The alert banner tells you exactly how many students need attention today — and the table below shows who, why, and what to do about it.",
+      "SEND status tags (EHCP, SEN Support) and progress indicators are visible on every student row. No need to look it up separately.",
+      "The student detail view shows active support strategies, parent communications, and assessment history — everything you need for one child, in one place.",
+      "Lesson planning with SEND context visible means differentiation is built into the workflow, not bolted on afterwards.",
+      "Parent messaging is linked to the child — conversations happen in context, not in disconnected email threads."
+    ],
+    screens:[
+      "Dashboard — alerts, SEND count, students needing attention",
+      "Communication — parent and staff messaging",
+      "Assessments — recording and tracking",
+      "Lessons — planning with SEND context",
+      "My Classroom — full class overview",
+      "Student Overview — individual child detail",
+      "Student Support Strategies — active interventions",
+      "Student Communications — parent conversation thread"
+    ],
+    benefits:[
+      "Open this at 8am and know your day. 3 students need attention, 4 have SEND status, one has a parent meeting tomorrow. No surprises.",
+      "All your parent and SENCO messages in one place — linked to the child they’re about. No more digging through email.",
+      "Record assessments tied to the student and their SEND context. The SENCO sees them automatically — no separate reporting.",
+      "Plan lessons with support strategies visible. Know which students need adjustments before you start teaching.",
+      "Every student, their SEND status, attendance, progress — the daily operational view every class teacher needs.",
+      "Drill into one student: their SEND status, active interventions, assessment history, and parent communications. Everything in one view.",
+      "See exactly what support strategies are in place for this student — what’s working, what’s been tried, what’s next.",
+      "The full conversation history with this student’s parent. Context travels with the conversation."
+    ],
+    connections:[
+      "The attention alerts pull from the SENCO portal (review dates, intervention changes) and the school portal (attendance flags). You see the combined picture.",
+      "Messages you send to parents appear in their parent portal. Messages from the SENCO appear here. One thread, multiple portals.",
+      "Assessments you record here feed into the SENCO’s graduated approach tracker and appear in the parent portal’s progress view.",
+      "SEND adjustment data comes from the SENCO portal. When they update a student’s support plan, it shows in your lesson planning view.",
+      "Attendance data comes from the school portal. SEND status comes from the SENCO portal. Your classroom view combines both.",
+      "This student view pulls data from the SENCO portal (support plans), the parent portal (home observations), and the school portal (attendance and behaviour).",
+      "Support strategies are managed in the SENCO portal’s graduated approach tracker. When the SENCO updates them, you see the changes here.",
+      "Parent messages flow between this portal and the parent portal. Both sides see the same conversation, linked to the same child."
+    ],
+    images:["Teacher Dashboard.png","Teacher Communication.png","Teacher Assessments .png","Teacher Lessons.png","Teacher My Classroom.png","Teacher My Student.png","Teacher My Student Support Strategies.png","Teacher My Student Communications.png"]
+  },
+  {
+    id:"school",
+    group:"Education Leadership",
+    title:"School Portal",
+    subtitle:"Whole-school visibility — 1,247 students, attendance, behaviour, SEND register, safeguarding, finance, and communications in one operational view.",
+    pill:"Education leadership",
+    tags:["Whole-school","Operational control","SEND oversight","Safeguarding"],
+    narrativeTitle:"The whole school, one screen",
+    narrativeText:"The school portal gives leadership teams operational visibility across attendance, behaviour, SEND, safeguarding, finance, communications, and reporting. Oakwood Academy’s dashboard shows 1,247 students, 94.2% attendance, 15 behaviour incidents today, and 186 on the SEND register including 42 EHCPs. Three alerts demand immediate attention. This is where school-level decisions are informed by real-time data.",
+    why:[
+      "Persistent Absence Alert: 12 students below the 90% threshold, flagged as high priority. Early warning that prevents escalation.",
+      "186 students on the SEND Register with 42 EHCPs — leadership sees provision pressure at a glance.",
+      "3 open safeguarding concerns visible on the dashboard — not buried in a separate system that someone checks once a week.",
+      "Attendance, behaviour, SEND, finance, communications, and reports in one portal — no switching between six different systems.",
+      "Patterns become visible: is behaviour concentrated around transitions? Are attendance dips correlating with SEND provision gaps?"
+    ],
+    screens:[
+      "Dashboard — 1,247 students, alerts, quick stats",
+      "SEND — register and provision overview",
+      "Attendance — patterns and persistent absence",
+      "Behaviour — incidents and interventions",
+      "Communications — school-wide messaging",
+      "Finance — budget and spend tracking",
+      "Reports — operational and statutory",
+      "Timetable — scheduling overview",
+      "Safeguarding — concerns and actions"
+    ],
+    benefits:[
+      "Leadership sees the entire school in one view: students, attendance, behaviour, SEND, safeguarding. Decisions based on data, not anecdote.",
+      "The SEND register broken down by support level. Where the provision pressure is. Which cohorts need attention.",
+      "Spot persistent absence patterns early — before they become statutory attendance concerns.",
+      "Behaviour data connected to students, classes, and times. Structural patterns, not just individual incidents.",
+      "One place for staff bulletins, parent letters, governor updates. Clear record of what was communicated and when.",
+      "Budget, committed spend, and forecast — including high-needs funding visibility for SEND provision.",
+      "Operational and statutory reports built in. Attendance summaries, SEND information reports, safeguarding returns — no manual collation.",
+      "Timetable with intervention sessions, support staff deployment, and alternative provision all needing space.",
+      "Active safeguarding concerns with actions taken and next steps — integrated with child-level data across the platform."
+    ],
+    connections:[
+      "Dashboard data aggregates from the teacher portal (classroom alerts), the SENCO portal (caseload and reviews), and the safeguarding layer across all portals.",
+      "SEND register data connects to the SENCO portal (graduated approach cycles) and the LA portal (EHCP compliance tracking).",
+      "Attendance data feeds into the teacher portal (daily classroom view) and the LA portal (population-level monitoring).",
+      "Behaviour data is visible to the teacher portal (individual student context) and the SENCO portal (pattern analysis).",
+      "Communications sent here can be surfaced in the parent portal (school announcements) and the teacher portal (staff bulletins).",
+      "Finance data connects to the LA portal’s funding dashboard — high-needs allocation visibility across both school and authority level.",
+      "Reports draw from data across teacher, SENCO, and attendance systems. The LA portal can also see school-level compliance metrics.",
+      "Timetable data informs the teacher portal’s lesson planning and the SENCO portal’s intervention scheduling.",
+      "Safeguarding concerns raised in any portal (teacher, foster home, social services) surface here. When a teacher flags a concern, school leadership sees it immediately."
+    ],
+    images:["School Portal Dashboard.png","School Send.png","School Portal Attendance.png","School Portal Behaviour.png","School Portal Communications.png","School Portal Finance.png","School Portal Reports.png","School Portal TimeTable.png","School Safeguarding.png"]
+  },
+  {
+    id:"senco",
+    group:"Education Coordination",
+    title:"SENCO Portal",
+    subtitle:"47 students, 12 active EHCPs, workflow tracking, graduated approach cycles, assessment management, and GDPR compliance — the SENCO’s operational hub.",
+    pill:"Education coordination",
+    tags:["Workflow control","EHCP management","Graduated approach","DPO compliance"],
+    narrativeTitle:"From reactive chasing to managed flow",
+    narrativeText:"The SENCO portal turns SEND coordination from email-and-spreadsheet chaos into a managed operational workflow. 47 students on the caseload, 12 active EHCPs flagged for urgency, 5 pending assessments, 3 upcoming reviews. Urgent tasks show names, dates, and priority levels. Graduated approach cycles track Assess-Plan-Do-Review for every student. DPO/GDPR compliance is built into the daily workflow, not a separate exercise.",
+    why:[
+      "The caseload overview (47 students, 12 EHCPs, 5 pending, 3 upcoming) gives the SENCO their workload reality in one glance — not a spreadsheet they have to update manually.",
+      "Urgent Tasks with colour-coded priorities and due dates mean statutory deadlines don’t slip. Alex Thompson’s EHCP Annual Review is due in two weeks — it’s flagged here.",
+      "The Graduated Approach Tracker manages every Assess-Plan-Do-Review cycle. Targets, interventions, and outcome evidence — what Ofsted wants to see, and what actually makes provision work.",
+      "DPO Management is part of the daily workflow. Data processing records, consent status, subject access requests — visible, not hidden.",
+      "Reports give provision mapping, outcome tracking, and compliance summaries ready for governors, Ofsted, and the LA."
+    ],
+    screens:[
+      "Dashboard — caseload, analytics, urgent tasks",
+      "Workflows — active process tracking",
+      "Assessments — current assessment list",
+      "New Assessment — creating an assessment",
+      "Messages — parent and professional comms",
+      "Resources — SEND materials and guidance",
+      "EHCP Management — statutory plan tracking",
+      "Graduated Approach Tracker — APDR cycles",
+      "DPO / GDPR compliance — data protection",
+      "Reports — provision and outcome analysis",
+      "Reports (continued) — detailed analytics"
+    ],
+    benefits:[
+      "The SENCO’s command centre: caseload size, review count, response time, workflow completion. Know exactly where you stand.",
+      "Every active process — assessments, reviews, referrals, graduated approach cycles — with status, owner, and deadline. Managed flow, not reactive chasing.",
+      "All current assessments with status, student, type, and due date. At a glance: what’s pending, in progress, overdue.",
+      "Create an assessment, assign it, and it feeds into the workflow tracker automatically. One action, full traceability.",
+      "Messages linked to the student they’re about. Connect with parents, teachers, external professionals, and the LA — all in context.",
+      "SEND guidance, intervention materials, and school-specific provision documents. No more searching shared drives.",
+      "Every statutory plan with status, review dates, and responsible professionals. The compliance dashboard SENCOs actually need.",
+      "Assess-Plan-Do-Review cycles for every student. Targets, interventions, outcome evidence. This is what makes provision work — and what Ofsted wants to see.",
+      "GDPR built into daily workflow. Data processing records, consent status, subject access requests — visible and manageable.",
+      "Provision mapping, outcome tracking, intervention effectiveness, caseload analysis. Ready for governors, Ofsted, and the LA.",
+      "Trends, cohort comparisons, provision cost analysis. SEND data turned into strategic intelligence."
+    ],
+    connections:[
+      "Dashboard data pulls from the teacher portal (assessment records), the school portal (attendance alerts), and the LA portal (EHCP deadlines). All converge here.",
+      "Workflows connect to the teacher portal (assessment completion), the parent portal (review meeting invitations), and the LA portal (statutory timelines).",
+      "Assessment data flows to the teacher portal (informing classroom practice) and the LA portal (statutory reporting).",
+      "New assessments are visible in the teacher portal (so teachers know what’s happening) and can trigger notifications in the parent portal.",
+      "Messages flow between this portal, the teacher portal, and the parent portal. The LA portal can also be part of the conversation for statutory cases.",
+      "Resources can be shared with teachers through their portal and with parents through theirs — governed document distribution.",
+      "EHCP data connects directly to the LA portal’s population view. When the SENCO updates a plan, the LA sees the status change.",
+      "Graduated approach data is visible to the teacher portal (active strategies) and feeds into the school portal’s provision reporting.",
+      "DPO data connects to the platform’s consent infrastructure — the same consent rules enforced in the parent portal are managed here.",
+      "Reports draw from assessment data (teacher portal), attendance data (school portal), and provision data (this portal). Cross-portal intelligence.",
+      "Detailed analytics aggregate data across the school portal, teacher portal, and LA portal for a complete provision picture."
+    ],
+    images:["Senco Dashboard.png","Senco WorkFlows.png","Senco Assesments.png","Senco New Assesments.png","Senco Messeges.png","Senco Resources.png","Senco EHCP Management.png","Senco Graduated Approach Tracker.png","Senco DPO.png","Senco Reports 1.png","Senco Reports 2.png"]
+  },
+  {
+    id:"foster-home",
+    group:"Care Settings",
+    title:"Foster Home Portal",
+    subtitle:"Daily care for 4 foster children — wellbeing tracking, school progress, health check-ins, schedules, and support contacts in one place.",
+    pill:"Care settings",
+    tags:["Daily care","Child wellbeing","Home-school link","Health tracking"],
+    narrativeTitle:"Care that connects, not just copes",
+    narrativeText:"The foster home portal brings daily care into the platform. Four children, each with wellbeing, school, and behaviour scores. A daily schedule from morning school prep to family dinner. Upcoming reminders for counselling sessions and parent-teacher meetings. Quick actions for logging behaviour, health checks, school updates, and contacting support. This is how foster carers stay connected to the wider support picture without drowning in paperwork.",
+    why:[
+      "Wellbeing bars for each child (Wellbeing/School/Behaviour) show how each child is doing across three dimensions — at a glance, every morning.",
+      "Lucas M. at 75% overall with behaviour at 70% — this kind of visibility lets carers and social workers intervene early, not after a crisis.",
+      "Today’s Schedule keeps the daily routine coordinated across four children — therapy sessions, tutoring, school prep, dinner time.",
+      "Quick Actions (Log Behaviour, Health Check, School Update, Contact Support) work at the pace of a real foster home — quick, specific, actionable.",
+      "Upcoming Reminders with countdowns mean nothing gets missed in a busy household."
+    ],
+    screens:[
+      "Dashboard — 4 children, wellbeing, schedule, alerts",
+      "Children — individual profiles and progress",
+      "Daily Care — routine logging and activities",
+      "Education — school progress and updates",
+      "Health — check-ins and medical tracking",
+      "Support — contacts and professional network"
+    ],
+    benefits:[
+      "Start the morning knowing how each child is doing, what’s scheduled, and what needs attention. Four children, one view.",
+      "Individual profiles with placement details, key workers, and support needs — the information carers need for consistent care.",
+      "Log routines, meals, activities, and incidents. No more scrambling to reconstruct what happened at review time.",
+      "See school progress without waiting for reports. When a teacher updates attendance or flags a concern, it’s here.",
+      "Medical appointments, medication, wellbeing check-ins. The 92% completion rate is exactly the metric a reviewing social worker needs.",
+      "Every professional in each child’s network — social worker, therapist, teacher, SENCO, IRO. One tap to reach the right person."
+    ],
+    connections:[
+      "Wellbeing scores are visible in the social worker’s portal (Social Services) — they see the same picture you do without requesting a report.",
+      "Child profiles connect to the Social Services portal (case details) and the Child in Care portal (the child’s own view of their support network).",
+      "Daily care logs feed into the Social Services portal as review evidence. What you record here supports the social worker’s statutory reporting.",
+      "Education data flows from the teacher portal (class updates) and the school portal (attendance). Two-way visibility between home and school.",
+      "Health data connects to the Social Services portal for review preparation and is part of the child’s living record in the Navigator portal.",
+      "The support contact list mirrors the child’s support circle — the same people visible in the Child in Care portal’s ‘My Circle’ view."
+    ],
+    images:["Foster Home Dashboard.png","Foster Home Children.png","Foster Home DailyCare.png","Foster Home Education.png","Foster Home Health.png","Foster Home Support.png"]
+  },
+  {
+    id:"social-services",
+    group:"Statutory Coordination",
+    title:"Social Services Portal",
+    subtitle:"23 active cases, 5 pending assessments, 8 upcoming meetings, 3 reports due — the social worker’s operational view.",
+    pill:"Statutory coordination",
+    tags:["Case management","Statutory visits","Placement oversight","Court reporting"],
+    narrativeTitle:"Live case movement, not static records",
+    narrativeText:"The social services portal gives social workers a live operational view of their caseload. 23 active cases, urgent actions with colour-coded deadlines (Tomorrow, Today, This Week), real-time updates showing care plan changes and placement movements, and quick actions for caseload, assessments, placements, meetings, and court export. This is case management that moves at the pace of the work, not the pace of the filing system.",
+    why:[
+      "Urgent Actions with colour-coded timelines mean statutory deadlines are impossible to miss. Emma Thompson’s LAC Review is due tomorrow — it’s right there.",
+      "Real-time updates show cross-portal data: Oliver Brown’s care plan updated 2 hours ago, Mia Davis’s placement changed to foster care 5 hours ago, Noah Martinez’s school report arrived yesterday.",
+      "Court Export compiles statutory evidence from across the platform — no manual document assembly from six different systems.",
+      "The caseload view shows every active case with status, risk level, and next action. An operational tool, not a spreadsheet.",
+      "When you schedule a LAC review, the foster carer sees it in their reminders, the SENCO gets notified, the IRO has it in their calendar. One action, multiple updates."
+    ],
+    screens:[
+      "Dashboard — 23 cases, urgent actions, recent updates",
+      "Caseload — active case list with status",
+      "Meetings — scheduled reviews and visits",
+      "Placements — placement tracking and changes",
+      "Reports — statutory and operational",
+      "Assessments — assessment management"
+    ],
+    benefits:[
+      "23 cases, 3 urgent actions, real-time updates. Your caseload reality in one view, updated as things happen.",
+      "Every case with status, risk level, last contact, next action. Sort and filter to focus on what matters today.",
+      "Schedule a review once and every relevant professional is notified — foster carer, SENCO, IRO. No chasing.",
+      "Current and historical placements with dates, types, and outcomes. When a placement changes, the network knows.",
+      "Statutory reports (LAC reviews, court reports, pathway plans) and operational reports (caseload analysis, visit compliance). Built in, not exported.",
+      "Track commissioned assessments, their status, and outcomes. Know what’s pending, in progress, and complete."
+    ],
+    connections:[
+      "Recent updates pull from the foster home portal (care logs), the school portal (attendance flags), and the teacher portal (concern notifications). Cross-portal visibility in real time.",
+      "Caseload data connects to the LA portal (population-level tracking) and the Navigator portal (document routing and share packs).",
+      "Meeting invitations flow to the foster home portal (carer reminders), the SENCO portal (school coordination), and the parent portal (family notification).",
+      "Placement changes are visible in the foster home portal (carer view), the child-in-care portal (the child’s own view), and the LA portal (statutory tracking).",
+      "Reports draw data from across the platform — school attendance, foster home logs, SENCO assessments, Navigator document history. One report, multiple sources.",
+      "Assessment data connects to the LA portal (where assessments are commissioned and funded) and the SENCO portal (where school-side evidence is gathered)."
+    ],
+    images:["Social Services Dashboard.png","Social Services Caseload.png","Social Services Meetings.png","Social Services Placements.png","Social Services Reports.png","Social Services Assessments.png"]
+  },
+  {
+    id:"local-authority",
+    group:"Statutory Coordination",
+    title:"Local Authority Portal",
+    subtitle:"Population-level EHCP management — 1,247 cases, 87 active assessments, 87.2% on-time completion, with school oversight, funding, and compliance tracking.",
+    pill:"Statutory coordination",
+    tags:["Population oversight","EHCP compliance","Funding control","School monitoring"],
+    narrativeTitle:"The case view and the population view, together",
+    narrativeText:"The LA portal is where statutory SEND management operates at scale. 1,247 case refs, 87 active assessments, 87.2% on-time completion (the compliance metric that matters most), and 125 plans reviewed. Below, an EHCP cases table shows every case with school, primary need, stage, status, and deadline. This is the population view that drives statutory performance — and the individual case view that drives daily work.",
+    why:[
+      "87.2% on-time completion is the headline metric — visible in green, immediately understood by cabinet members and case officers alike.",
+      "The EHCP case table shows every case with school, primary need, stage, status, and deadline. This is how statutory performance is tracked.",
+      "87 active assessments with timeline tracking means bottlenecks are visible before they become tribunal risks.",
+      "School-level data shows provision quality, case volumes, and compliance by school. The LA sees which schools need support — or challenge.",
+      "Funding connects high-needs allocation to case movement and provision. Financial and operational reality in one view."
+    ],
+    screens:[
+      "Population Overview — 1,247 cases, compliance, EHCP table",
+      "Population Overview (continued)",
+      "EHCP Case Tracking — individual case status",
+      "Communications — LA to school messaging",
+      "Assessment Assignments — commissioned assessments",
+      "Funding Dashboard — high-needs allocation",
+      "Reports & Analytics — statutory performance",
+      "School Provision Overview — school-level data"
+    ],
+    benefits:[
+      "1,247 cases, 87.2% compliance, 2 deadlines flagged. The population view that statutory performance depends on.",
+      "Cohort breakdowns and trend data. The information that goes into cabinet reports and annual SEND reviews.",
+      "Every stage of every EHCP assessment — who’s responsible, what’s complete, what’s overdue. Where case officers manage their workload.",
+      "LA-to-school communications tracked and auditable. Clear record of what was requested, when, and whether it was provided.",
+      "Commissioned assessments — EP, SALT, OT — with status and provider performance. Know what’s pending across the authority.",
+      "High-needs funding by school, by child, by provision type. Financial accountability that connects spend to outcomes.",
+      "20-week compliance, tribunal rates, annual review completion, cohort analysis. The metrics that determine whether the service is judged effective.",
+      "Case volumes, support levels, compliance rates by school. See which schools are managing SEND well and which need intervention."
+    ],
+    connections:[
+      "Population data aggregates from every SENCO portal across the authority — case counts, compliance rates, and assessment timelines flow upward automatically.",
+      "Trend data connects to the school portal (attendance and behaviour patterns) and the SENCO portal (graduated approach completion rates).",
+      "EHCP case tracking connects to the SENCO portal (school-side evidence) and the Social Services portal (care-side context for looked-after children).",
+      "Communications flow between this portal and the school portal. When the LA requests information, the school sees the request in their communications view.",
+      "Assessment assignments connect to the SENCO portal (where school-side evidence is gathered) and to external assessment providers through the Navigator portal’s routing engine.",
+      "Funding data connects to the school portal (school-level spend tracking) and feeds into national reporting.",
+      "Reports draw from SENCO portals (school-level data), social services portal (LAC case data), and Navigator portal (document processing metrics).",
+      "School provision data flows from the school portal (operational metrics) and the SENCO portal (SEND-specific provision tracking)."
+    ],
+    images:["LA Dashboard 1.png","LA Dashboard 2.png","LA Case Tracking.png","LA Communications.png","LA Assessments 1.png","LA Funding 2.png","LA Reports.png","LA Schools.png"]
+  },
+  {
+    id:"navigator",
+    group:"Infrastructure & Governance",
+    title:"Navigator Portal",
+    subtitle:"The coordination backbone — intake processing, consent-aware routing, share pack assembly, and document movement across the entire platform.",
+    pill:"Infrastructure & governance",
+    tags:["Intake processing","Document routing","Share packs","Consent-aware"],
+    narrativeTitle:"The engine behind the portals",
+    narrativeText:"Navigator is what makes the other portals work together. It handles how documents enter the system (intake), where they go (routing), who can see them (consent), and how they’re packaged for external sharing (share packs). The dashboard shows 98% retention rate, real-time activity (documents uploaded, routed, consented, packaged), and six operational modules. This is the coordination infrastructure that most users never see — but that every portal depends on.",
+    why:[
+      "The Routing Engine delivers documents to 3 destinations (Riverside Primary, City Healthcare Trust, County Council SEND Team) with a 95.2% delivery rate. Documents reach the right people automatically.",
+      "Share Packs assemble governed document bundles — an EHCP Review Pack for the LA, a Transition Pack for the school, a Healthcare Pack for the trust. Structured sharing, not email attachments.",
+      "Consent & Safety is fail-closed by default. If permission hasn’t been granted, access is denied. No guessing, no over-sharing.",
+      "Intake & Uploads validates and categorises documents before they enter the routing pipeline. Nothing enters the system without passing quality checks.",
+      "Routing Rules define automated logic — ‘Auto-route EHCP to LA’, ‘Mandate reports to Healthcare’ — with priority levels and audit trails."
+    ],
+    screens:[
+      "Dashboard — system health, quick actions, modules",
+      "Intake & Uploads — document processing",
+      "Consent Management — sharing permissions",
+      "Routing Engine — destinations and delivery",
+      "Routing Rules — automated routing logic",
+      "Routing History — audit trail of movements",
+      "Share Packs — governed document bundles",
+      "Notifications — system and user alerts",
+      "Events — activity timeline",
+      "Onboarding — new user setup",
+      "Profile Management — user configuration",
+      "Settings — system preferences"
+    ],
+    benefits:[
+      "The operational backbone: system health, pending items, recent activity, and six modules that keep the platform coordinated.",
+      "Documents enter the system through validated intake — drag and drop, categorisation, quality checks. Nothing goes in unvalidated.",
+      "Granular, role-based, purpose-specific consent. When a parent grants sharing permission, it’s enforced consistently everywhere.",
+      "Documents move to where they’re needed: school, healthcare, LA. 95.2% delivery rate. Automatic, auditable, governed.",
+      "Routing logic defined once, applied consistently. Auto-route EHCPs to LA. Mandate reports to Healthcare. No manual forwarding.",
+      "Every document movement logged: timestamp, destination, status, triggering rule. Full audit trail.",
+      "Document bundles for external stakeholders. EHCP Review Pack to LA (Sent). Transition Pack to School (Pending). Healthcare Pack (Approved). Structured, not ad hoc.",
+      "Document arrivals, consent changes, routing completions, action requests. Everyone stays informed.",
+      "Full chronological activity timeline for any profile. The operational audit trail.",
+      "New user setup: role assignment, portal access, consent configuration, initial uploads. First day to first action, streamlined.",
+      "User configuration: personal details, role assignments, access levels, notification preferences.",
+      "System preferences: routing defaults, consent policies, notification rules, integration settings."
+    ],
+    connections:[
+      "Navigator is the backbone. Every portal sends documents through it (teacher reports, SENCO assessments, social worker case notes) and receives routed documents from it.",
+      "Intake connects to whichever portal originated the document — a teacher uploading an assessment, a parent uploading a report, a social worker submitting case notes.",
+      "Consent decisions made in the parent portal are enforced here. When a parent changes sharing permissions, Navigator updates routing rules across the platform.",
+      "Routing delivers documents to the school portal, the LA portal, healthcare systems, and any other configured destination. The portal doesn’t need to know how — Navigator handles it.",
+      "Routing rules connect to the LA portal (statutory routing requirements), the SENCO portal (assessment distribution), and the social services portal (case document sharing).",
+      "Routing history provides the audit trail that the EN Command Centre monitors and that compliance teams review.",
+      "Share packs are assembled from documents across multiple portals — SENCO assessments, social worker reports, teacher evaluations — into one governed bundle.",
+      "Notifications flow to every portal in the platform. When a document arrives for a teacher, they see it in their portal. When consent changes, the relevant portals update.",
+      "Events connect to the EN Command Centre’s audit viewer — platform-wide activity monitoring depends on Navigator’s event stream.",
+      "Onboarding connects to the EN Command Centre’s portal monitor — when a new user is set up, the ops team can see the portal estate growing.",
+      "Profile data is shared across all portals a user has access to. Update it once here, it’s consistent everywhere.",
+      "Settings govern the behaviour of the entire routing and consent infrastructure. Changes here affect how every portal moves data."
+    ],
+    images:["Navigator Dashboard.png","Navigator Intake.png","Navigator Consent.png","Navigator Routing.png","Navigator Routing Rules.png","Navigator Routing History.png","Navigator Share-Packs.png","Navigator Notifications.png","Navigator Events.png","Navigator Onboarding.png","Navigator Profile Management.png","Navigator Settings.png"]
+  },
+  {
+    id:"en-command-centre",
+    group:"Infrastructure & Governance",
+    title:"EN Command Centre",
+    subtitle:"Platform operations — service health, queue management, quarantine, connectors, audit, and portal estate monitoring for the operations team.",
+    pill:"Infrastructure & governance",
+    tags:["Service health","Queue management","Quarantine","Audit trail"],
+    narrativeTitle:"Operated, not just deployed",
+    narrativeText:"The EN Command Centre is the operational control plane for the entire NDDCC platform. Six core services monitored with CPU, RAM, and status. Queue depths showing throughput capacity. A quarantine system that catches failed validations before they affect users. An audit trail that records every significant action. A portal monitor that shows the health of all 24 portals. This is what separates a platform from a prototype.",
+    why:[
+      "The Control Tower shows 6 services (Gateway, Ingest, Transform, Router, Safety, Registry) with real-time status. Problems are caught before users notice.",
+      "Queue depths with processing rates show the system’s capacity and current load. If something is backing up, the ops team knows immediately.",
+      "Quarantine catches documents and transactions that fail validation — they’re surfaced for human review, not silently dropped.",
+      "The Audit Viewer provides a searchable record of every significant platform action. When someone asks ‘who accessed this record?’, the answer is there in seconds.",
+      "Portal Monitor shows all 24 portals — health, uptime, active users, errors. One view of the entire deployment."
+    ],
+    screens:[
+      "Overview — control tower, queues, quarantine",
+      "Alerts — active warnings and incidents",
+      "Jobs & Queues — processing pipeline status",
+      "Quarantine — held items for review",
+      "Portal Monitor — estate-wide portal health",
+      "Connectors — integration status",
+      "Documents — document processing overview",
+      "Audit — audit log and activity",
+      "Audit Viewer — searchable audit records",
+      "Portals — portal configuration",
+      "Config — system configuration",
+      "System Config — infrastructure settings",
+      "System Config (continued)"
+    ],
+    benefits:[
+      "Six services, real-time status, queue depths, quarantine alerts. The ops team sees everything that matters.",
+      "Warnings and incidents with severity, timestamp, and suggested action. Problems surfaced, not hidden.",
+      "Pipeline throughput: what’s queued, processing, complete, failed. The capacity planning view.",
+      "The safety net: failed validations, anomalous transactions, consent questions — held for human review, not dropped.",
+      "Every portal’s health in one view: status, uptime, users, errors. Essential when you’re running 24 portals.",
+      "External integrations: databases, APIs, notification services, document stores. Degradation visible immediately.",
+      "Document volumes, processing times, routing success rates. System throughput made visible.",
+      "Every login, data access, consent change, routing event, configuration update — recorded and searchable.",
+      "Search, filter, and export audit records. ‘Who accessed this child’s record?’ — answered in seconds.",
+      "Per-portal settings: feature flags, access controls, integration points, operational parameters.",
+      "Platform-wide settings: authentication, logging, rate limits, service mesh configuration.",
+      "Database connections, cache, message broker, deployment parameters. The deep configuration layer.",
+      "Extended infrastructure settings."
+    ],
+    connections:[
+      "The Command Centre monitors every other portal in the platform. Service health, queue processing, and error rates from all 24 portals flow here.",
+      "Alerts aggregate from all services — Navigator routing failures, consent processing errors, portal health issues. Everything surfaces here.",
+      "Queue data comes from the Navigator portal’s routing and intake pipelines. When documents are being processed, this is where throughput is monitored.",
+      "Quarantine items originate from Navigator (document validation) and from the consent engine (access decision anomalies).",
+      "Portal Monitor tracks every portal — child, parent, teacher, school, SENCO, social services, foster home, LA, Navigator, NRV, and all others.",
+      "Connector status affects every portal that depends on external integrations — database connections, API endpoints, notification delivery.",
+      "Document processing data comes from the Navigator portal’s intake and routing pipelines.",
+      "Audit data is generated by every portal in the platform. Every login, every access, every change — from all 24 portals — flows here.",
+      "Audit Viewer queries the same audit data that’s generated across all portals. Cross-portal audit trail in one searchable view.",
+      "Portal configuration affects how each individual portal behaves — changes here ripple through to the portal’s users.",
+      "System configuration governs platform-wide behaviour — authentication, security, rate limiting across all portals.",
+      "Infrastructure settings determine how the platform connects to its underlying services — databases, caches, message brokers.",
+      "Continued infrastructure configuration."
+    ],
+    images:["EN Command Centre Overview.png","EN Command Centre Alerts.png","EN Command Centre Jobs&Queues.png","EN Command Centre Quarantine.png","EN Command Centre Portal Monitor.png","EN Command Centre Connectors.png","EN Command Centre Documents.png","EN Command Centre Audit.png","EN Command Centre Audit Viewer.png","EN Command Centre Portals.png","EN Command Centre Config.png","EN Command Centre System-Config 1.png","EN Command Centre System-Config 2.png"]
+  },
+  {
+    id:"nrv",
+    group:"Infrastructure & Governance",
+    title:"NRV — Neurodivergent Research Vault",
+    subtitle:"102 research papers, AI-powered semantic search, 10 trusted sources — evidence-based practice at the point of need.",
+    pill:"Research & evidence",
+    tags:["Evidence base","Semantic search","102 papers","Trusted sources"],
+    narrativeTitle:"Evidence where decisions are made",
+    narrativeText:"The Research Vault is the evidence layer beneath the platform. 102 research papers from 10 trusted sources, searchable with AI-powered semantic search. When a SENCO needs to justify an intervention choice, or a teacher wants to understand a neurodivergent condition, or a social worker needs evidence for a court report — the research is here. Not a Google search. A governed, quality-controlled evidence library built for the people using the platform.",
+    why:[
+      "102 research papers curated from 10 trusted sources. Quality-controlled, not everything-on-the-internet.",
+      "AI-powered semantic search means you can search by meaning — ‘strategies for sensory overwhelm in Year 3’ returns relevant results, not just keyword matches.",
+      "Evidence at the point of need means intervention decisions are backed by research, not just experience or habit.",
+      "Trusted source curation means the evidence base is validated and maintained — not a static library that goes stale."
+    ],
+    screens:[
+      "Research Vault — search, filters, trusted sources"
+    ],
+    benefits:[
+      "102 papers, 10 trusted sources, AI-powered search. Evidence-based practice made accessible — not academic, not buried, not out of date."
+    ],
+    connections:[
+      "The Research Vault is accessible from the SENCO portal (intervention evidence), the teacher portal (understanding conditions), and the social services portal (court report evidence). Research travels to where decisions are made."
+    ],
+    images:["NRV Dashboard.png"]
+  }
+];
+
+let state = { slideIndex: 0, screenIndex: 0 };
+
+const FIXED_LEAD_IDS = ["coordination-reality","standards-assurance","safeguarding-consent","portal-selector"];
+const SELECTABLE_PORTAL_IDS = slides.map(s=>s.id).filter(id=>!FIXED_LEAD_IDS.includes(id));
+const DEFAULT_PORTAL_SELECTION = ["child","parent","teacher","senco","local-authority","navigator"];
+let selectedPortalIds = [];
+let activeSlides = [];
+
+function buildActiveSlides(){
+  const fixed = FIXED_LEAD_IDS.map(id=>slides.find(s=>s.id===id)).filter(Boolean);
+  const chosen = selectedPortalIds.map(id=>slides.find(s=>s.id===id)).filter(Boolean);
+  activeSlides = [...fixed, ...chosen];
+}
+
+function makeNav(){
+  const nav = document.getElementById("sidebarNav");
+  const grouped = {};
+  activeSlides.forEach((s, i)=>{
+    if (SELECTABLE_PORTAL_IDS.includes(s.id) && !selectedPortalIds.includes(s.id)) return;
+    if(!grouped[s.group]) grouped[s.group] = [];
+    grouped[s.group].push({ ...s, i });
+  });
+  nav.innerHTML = "";
+  Object.entries(grouped).forEach(([group, items])=>{
+    const wrapper = document.createElement("div");
+    wrapper.className = "nav-group";
+    wrapper.innerHTML = `<div class="nav-group-title">${group}</div>`;
+    items.forEach(item=>{
+      const btn = document.createElement("button");
+      btn.className = "nav-item";
+      btn.textContent = item.title;
+      btn.onclick = ()=> goToSlide(item.i);
+      btn.dataset.index = item.i;
+      wrapper.appendChild(btn);
+    });
+    nav.appendChild(wrapper);
+  });
+}
+
+function updateNavActive(){
+  document.querySelectorAll(".nav-item").forEach(el=>{
+    el.classList.toggle("active", Number(el.dataset.index) === state.slideIndex);
+  });
+  const activeBtn = document.querySelector(`.nav-item[data-index="${state.slideIndex}"]`);
+  if (activeBtn) activeBtn.scrollIntoView({block:"nearest"});
+}
+
+function clampActiveSlideAfterSelection(previousSlideId){
+  const nextIndex = activeSlides.findIndex(s => s.id === previousSlideId);
+  if (nextIndex >= 0) {
+    state.slideIndex = nextIndex;
+  } else {
+    const selectorIndex = activeSlides.findIndex(s => s.id === "portal-selector");
+    state.slideIndex = selectorIndex >= 0 ? selectorIndex : 0;
+  }
+  state.screenIndex = 0;
+}
+
+function setSelection(ids){
+  const previousSlideId = activeSlides[state.slideIndex]?.id || "portal-selector";
+  selectedPortalIds = ids.filter(id=>SELECTABLE_PORTAL_IDS.includes(id));
+  buildActiveSlides();
+  clampActiveSlideAfterSelection(previousSlideId);
+  makeNav();
+  renderSlide();
+}
+
+function togglePortal(id, force){
+  const exists = selectedPortalIds.includes(id);
+  const next = typeof force === 'boolean' ? force : !exists;
+  const previousSlideId = activeSlides[state.slideIndex]?.id || "portal-selector";
+  if (next && !exists) selectedPortalIds = [...selectedPortalIds, id];
+  if (!next && exists) selectedPortalIds = selectedPortalIds.filter(x=>x!==id);
+  buildActiveSlides();
+  clampActiveSlideAfterSelection(previousSlideId);
+  makeNav();
+  renderSlide();
+}
+
+function renderPortalSelector(){
+  const stage = document.getElementById("visualStage");
+  const portalSlides = slides.filter(s=>SELECTABLE_PORTAL_IDS.includes(s.id));
+  const count = selectedPortalIds.length;
+  stage.innerHTML = `
+    <div class="selector-wrap">
+      <div class="eyebrow">Audience-led walkthrough</div>
+      <h3 style="margin:0 0 10px;font-size:24px;line-height:1.2;">Choose which parts of the platform to explore</h3>
+      <p style="margin:0;color:#435570;font-size:16px;line-height:1.55;max-width:900px;">Pick the areas that matter most to you. Each portal is built for a specific role — select the ones you'd like to learn about.</p>
+      <div class="selector-toolbar">
+        <button type="button" data-select-action="parent-carer" class="primary">I'm a Parent or Carer</button>
+        <button type="button" data-select-action="teacher-senco">I'm a Teacher or SENCO</button>
+        <button type="button" data-select-action="social-care">I'm in Social Care</button>
+        <button type="button" data-select-action="school-leader">I'm a School Leader</button>
+        <button type="button" data-select-action="all">Show me everything</button>
+        <button type="button" data-select-action="clear">Clear</button>
+        <div class="summary">${count} portal${count === 1 ? '' : 's'} selected</div>
+      </div>
+      <div class="selector-grid">
+        ${portalSlides.map(slide => {
+          const selected = selectedPortalIds.includes(slide.id);
+          const screenCount = (slide.images || []).length || 1;
+          return `
+            <div class="selector-card${selected ? ' selected' : ''}" data-portal-card="${slide.id}">
+              <label>
+                <input type="checkbox" data-portal-toggle="${slide.id}" ${selected ? 'checked' : ''}>
+                <div>
+                  <h3>${slide.title}</h3>
+                  <p>${slide.subtitle}</p>
+                </div>
+              </label>
+              <div class="selector-meta">
+                <span class="selector-tag">${slide.pill}</span>
+                <span class="selector-tag">${screenCount} screen${screenCount === 1 ? '' : 's'}</span>
+              </div>
+            </div>`;
+        }).join('')}
+      </div>
+      <div class="selector-actions">
+        <button type="button" class="primary" id="applyPortalSelection" ${count ? '' : 'disabled'}>${count ? 'Explore selected portals' : 'Select at least one portal to continue'}</button>
+      </div>
+    </div>`;
+
+  document.getElementById("visualCaption").textContent = "";
+  document.getElementById("thumbDots").innerHTML = "";
+  document.getElementById("thumbLabels").innerHTML = "";
+  document.getElementById("screenCount").textContent = "Selection screen";
+  document.getElementById("prevScreenBtn").disabled = true;
+  document.getElementById("nextScreenBtn").disabled = true;
+
+  stage.querySelectorAll('[data-portal-toggle]').forEach(input=>{
+    input.addEventListener('click', e=> e.stopPropagation());
+    input.addEventListener('change', e=> togglePortal(e.target.getAttribute('data-portal-toggle'), e.target.checked));
+  });
+  stage.querySelectorAll('[data-portal-card]').forEach(card=>{
+    card.addEventListener('click', e=>{
+      if (e.target.closest('button')) return;
+      togglePortal(card.getAttribute('data-portal-card'));
+    });
+  });
+  stage.querySelectorAll('[data-select-action]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const action = btn.getAttribute('data-select-action');
+      if (action === 'all') setSelection([...SELECTABLE_PORTAL_IDS]);
+      if (action === 'parent-carer') setSelection(["child","child-in-care","parent","teacher","school"]);
+      if (action === 'teacher-senco') setSelection(["teacher","school","senco","parent"]);
+      if (action === 'social-care') setSelection(["social-services","foster-home","child-in-care","local-authority"]);
+      if (action === 'school-leader') setSelection(["school","senco","teacher","local-authority"]);
+      if (action === 'clear') setSelection([]);
+    });
+  });
+  const apply = stage.querySelector('#applyPortalSelection');
+  if (apply) apply.addEventListener('click', ()=>{
+    if (!selectedPortalIds.length) return;
+    const selectorIndex = activeSlides.findIndex(s=>s.id==='portal-selector');
+    goToSlide(Math.min(selectorIndex + 1, activeSlides.length - 1));
+  });
+}
+
+async function renderSlide(){
+  const slide = activeSlides[state.slideIndex];
+  document.getElementById("heroTitle").textContent = slide.title;
+  document.getElementById("heroSubtitle").textContent = slide.subtitle;
+  document.getElementById("heroPill").textContent = slide.pill;
+
+  const heroTags = document.getElementById("heroTags");
+  heroTags.innerHTML = "";
+  slide.tags.forEach(t=>{
+    const el = document.createElement("span");
+    el.className = "tag";
+    el.textContent = t;
+    heroTags.appendChild(el);
+  });
+
+  document.getElementById("narrativeTitle").textContent = slide.narrativeTitle;
+  document.getElementById("narrativeText").textContent = slide.narrativeText;
+
+  const whyList = document.getElementById("whyList");
+  whyList.innerHTML = slide.why.map(x=>`<li>${x}</li>`).join("");
+
+  const screensList = document.getElementById("screensList");
+  screensList.innerHTML = slide.screens.map(x=>`<li>${x}</li>`).join("");
+
+  // Update benefit and connection cards
+  const benefits = slide.benefits || [];
+  const connections = slide.connections || [];
+  document.getElementById("benefitText").textContent = benefits[state.screenIndex] || benefits[0] || "";
+  document.getElementById("connectText").textContent = connections[state.screenIndex] || connections[0] || "";
+  document.getElementById("benefitCard").style.display = benefits.length ? "block" : "none";
+  document.getElementById("connectCard").style.display = connections.length ? "block" : "none";
+
+  updateNavActive();
+
+  const stage = document.getElementById("visualStage");
+  const caption = document.getElementById("visualCaption");
+  const dots = document.getElementById("thumbDots");
+  const labels = document.getElementById("thumbLabels");
+  stage.innerHTML = "";
+  caption.textContent = "";
+  dots.innerHTML = "";
+  labels.innerHTML = "";
+
+  if(slide.mode === "selector"){
+    document.getElementById("benefitCard").style.display = "none";
+    document.getElementById("connectCard").style.display = "none";
+    renderPortalSelector();
+    return;
+  }
+
+  if(slide.mode === "infographic"){
+    document.getElementById("screenCount").textContent = "Infographic section";
+    document.getElementById("prevScreenBtn").disabled = true;
+    document.getElementById("nextScreenBtn").disabled = true;
+    document.getElementById("benefitCard").style.display = "none";
+    document.getElementById("connectCard").style.display = "none";
+    stage.innerHTML = slide.render();
+    return;
+  }
+
+  const total = slide.images.length;
+  state.screenIndex = Math.max(0, Math.min(state.screenIndex, total - 1));
+  document.getElementById("screenCount").textContent = `Screen ${state.screenIndex + 1} of ${total}`;
+  document.getElementById("prevScreenBtn").disabled = total <= 1;
+  document.getElementById("nextScreenBtn").disabled = total <= 1;
+
+  slide.images.forEach((name, idx)=>{
+    const d = document.createElement("button");
+    d.className = "thumb" + (idx === state.screenIndex ? " active" : "");
+    d.onclick = ()=> { state.screenIndex = idx; renderSlide(); };
+    dots.appendChild(d);
+
+    const l = document.createElement("button");
+    l.className = "thumb-label" + (idx === state.screenIndex ? " active" : "");
+    l.textContent = slide.screens[idx] || `Screen ${idx+1}`;
+    l.onclick = ()=> { state.screenIndex = idx; renderSlide(); };
+    labels.appendChild(l);
+  });
+
+  const target = slide.images[state.screenIndex];
+  const candidates = buildCandidates([target]);
+  const working = await findWorkingImage(candidates);
+  if(working){
+    const img = document.createElement("img");
+    img.src = working;
+    img.alt = slide.title + " screenshot";
+    stage.appendChild(img);
+    caption.textContent = target;
+  } else {
+    stage.innerHTML = `
+      <div style="padding:34px; display:grid; gap:16px;">
+        <div style="font-size:22px;font-weight:800;color:#24395f;">Image not found</div>
+        <div style="color:#556884; font-size:15px; line-height:1.5;">
+          Could not load <strong>${target}</strong>.<br>
+          Place images in the same folder as this HTML, or inside <strong>Final Pic Set</strong>, <strong>images</strong>, or <strong>assets</strong>.
+        </div>
+        <div style="border:1px solid var(--border); background:#fff; border-radius:14px; padding:14px;">
+          <div style="font-size:13px;color:#7f8dab;text-transform:uppercase;letter-spacing:.08em;font-weight:800;margin-bottom:8px;">Tried paths</div>
+          <div style="font-family:Consolas,monospace;font-size:12px;color:#3c4c67;line-height:1.5;word-break:break-all;">${candidates.join("<br>")}</div>
+        </div>
+      </div>`;
+    caption.textContent = "Missing local image";
+  }
+}
+
+function goToSlide(index){
+  state.slideIndex = (index + activeSlides.length) % activeSlides.length;
+  state.screenIndex = 0;
+  renderSlide();
+}
+
+function nextSlide(){ goToSlide(state.slideIndex + 1); }
+function prevSlide(){ goToSlide(state.slideIndex - 1); }
+
+function nextScreen(){
+  const slide = activeSlides[state.slideIndex];
+  if(slide.mode === "selector"){
+    if (selectedPortalIds.length) nextSlide();
+    return;
+  }
+  if(slide.mode === "infographic"){ nextSlide(); return; }
+  if(state.screenIndex < slide.images.length - 1){
+    state.screenIndex += 1;
+    renderSlide();
+  }else{
+    nextSlide();
+  }
+}
+function prevScreen(){
+  const slide = activeSlides[state.slideIndex];
+  if(slide.mode === "selector" || slide.mode === "infographic"){ prevSlide(); return; }
+  if(state.screenIndex > 0){
+    state.screenIndex -= 1;
+    renderSlide();
+  }else{
+    prevSlide();
+  }
+}
+
+document.getElementById("prevScreenBtn").onclick = prevScreen;
+document.getElementById("nextScreenBtn").onclick = nextScreen;
+
+document.addEventListener("keydown", (e)=>{
+  if(e.key === "ArrowRight") nextScreen();
+  if(e.key === "ArrowLeft") prevScreen();
+});
+
+buildActiveSlides();
+makeNav();
+renderSlide();
+</script>
+</body>
+</html>
