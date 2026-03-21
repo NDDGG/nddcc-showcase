@@ -1819,16 +1819,31 @@ function clampActiveSlideAfterSelection(previousSlideId){
   state.screenIndex = 0;
 }
 
+function saveScrollPos(){
+  const stage = document.getElementById('visualStage');
+  const wrap = document.querySelector('.selector-wrap');
+  return { stage: stage ? stage.scrollTop : 0, wrap: wrap ? wrap.scrollTop : 0 };
+}
+function restoreScrollPos(pos){
+  const stage = document.getElementById('visualStage');
+  const wrap = document.querySelector('.selector-wrap');
+  if (stage) stage.scrollTop = pos.stage;
+  if (wrap) wrap.scrollTop = pos.wrap;
+}
+
 function setSelection(ids){
+  const scrollPos = saveScrollPos();
   const previousSlideId = activeSlides[state.slideIndex]?.id || "portal-selector";
   selectedPortalIds = ids.filter(id=>SELECTABLE_PORTAL_IDS.includes(id));
   buildActiveSlides();
   clampActiveSlideAfterSelection(previousSlideId);
   makeNav();
   renderSlide();
+  restoreScrollPos(scrollPos);
 }
 
 function togglePortal(id, force){
+  const scrollPos = saveScrollPos();
   const exists = selectedPortalIds.includes(id);
   const next = typeof force === 'boolean' ? force : !exists;
   const previousSlideId = activeSlides[state.slideIndex]?.id || "portal-selector";
@@ -1838,6 +1853,7 @@ function togglePortal(id, force){
   clampActiveSlideAfterSelection(previousSlideId);
   makeNav();
   renderSlide();
+  restoreScrollPos(scrollPos);
 }
 
 function renderPortalSelector(){
