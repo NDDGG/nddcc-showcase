@@ -990,6 +990,137 @@ const slides = [
   },
 
   {
+    id:"consent-everywhere",
+    group:"What Makes This Different",
+    title:"Consent That Travels With You",
+    subtitle:"Every portal. Every agency. One consent dashboard. You decide who sees what — and you can change your mind at any time.",
+    pill:"Consent & Trust",
+    tags:["Cross-portal consent","Proxy authorisation","Domain-based","WCAG 2.2 AA"],
+    narrativeTitle:"Your data. Your decision. Everywhere.",
+    narrativeText:"Most platforms show you consent settings for one service. NDDCC shows you every consent decision across every agency — education, health, social services, safeguarding — in one view. The Consent Dashboard appears in every single portal. A parent can see who has access to their child's health records, education data, and social services information from one screen. Proxy authorisation means a trusted advocate or family member can make consent decisions on someone's behalf, with clear scope limits, validity dates, and authority verification. This is not a cookie banner. This is informed, granular, cross-agency consent that puts real power in real hands.",
+    why:[
+      "Cross-portal consent visibility — see every decision across education, health, social services, and safeguarding in one place. No other platform does this.",
+      "Proxy authorisation with scope limits — a parent, advocate, or trusted person can manage consent with clear boundaries on what they can and cannot authorise.",
+      "Domain-based grouping — consent is organised by purpose (health, education, safeguarding), not by technical system. It makes sense to the person reading it.",
+      "Every consent change is audit-logged with an immutable receipt. If anyone ever asks 'who authorised this?', the answer is there."
+    ],
+    screens:[
+      "Consent Dashboard — child's view: My Decisions, Pending, Proxy, History tabs",
+      "Consent Dashboard — parent's view: managing consent for your child across agencies",
+      "Consent Dashboard — SENCO's view: seeing which data can be shared with which agencies",
+      "Consent Dashboard — healthcare view: clinical consent status per patient",
+      "Consent Dashboard — social services view: cross-agency consent for looked-after children"
+    ],
+    benefits:[
+      "A child can see every consent decision that affects them — who has access to what, and why.",
+      "A parent manages consent from one screen — not five different logins across five different services.",
+      "A SENCO knows exactly what data they can share before they pick up the phone or write an email.",
+      "A clinician sees consent status per patient — no guessing, no over-sharing, no compliance risk.",
+      "A social worker sees cross-agency consent for looked-after children — education, health, placement data all governed consistently."
+    ],
+    connections:[
+      "The consent engine is shared across all 24 portals. A consent change made in the parent portal is immediately enforced in the healthcare portal, the school portal, the social services portal — everywhere.",
+      "Proxy authorisation links to the central user directory — when a parent is verified as a proxy, their authority scope is enforced across every portal the child uses.",
+      "SENCO consent view connects to the Navigator routing engine — if consent is withdrawn, document routing stops automatically.",
+      "Healthcare consent status feeds into the AI Safety Engine — if a child's data shouldn't be included in risk scoring, the consent engine enforces that at the database level.",
+      "Social services consent integrates with the safeguarding override system — NDGuard can override consent for child protection, but every override is logged and auditable."
+    ],
+    images:["Feature Consent Child.png","Feature Consent Parent.png","Feature Consent SENCO.png","Feature Consent Healthcare.png","Feature Consent Social Services.png"]
+  },
+  {
+    id:"burnout-radar",
+    group:"What Makes This Different",
+    title:"Burnout Radar & Wellness",
+    subtitle:"A 6-dimension early warning system that belongs to you — not your employer. Private by default. Shared only with your explicit consent.",
+    pill:"Wellbeing Intelligence",
+    tags:["6-axis radar","Private by default","Trend analysis","Sensory-aware"],
+    narrativeTitle:"Your wellbeing is not your employer's dashboard metric.",
+    narrativeText:"The Burnout Radar tracks six dimensions of wellbeing — Stress, Overwhelm, Sensory Overload, Social Drain, Work-Life Imbalance, and Sleep Issues — on an interactive radar chart based on your last 7 days of journal entries. Trend arrows show whether each dimension is improving, stable, or worsening. Recommendations adapt to your current state. This data is yours. It stays private. Your employer never sees it unless you explicitly choose to share a summary — and even then, only anonymised wellness trends, never raw data. NDDCC was built on the principle that neurodivergent people deserve tools that protect them, not tools that surveil them.",
+    why:[
+      "6-dimension radar visualisation — Stress, Overwhelm, Sensory Overload, Social Drain, Work-Life Imbalance, Sleep Issues. Not a single mood score. A real picture.",
+      "Private by default — this is T1 data. Your employer cannot see it. Period. Only anonymised team wellness trends (T2) can be shared, and only with your consent.",
+      "7-day rolling analysis with trend arrows — 'Stress: stable', 'Overwhelm: worsening' — so you can act before burnout hits, not after.",
+      "Workplace adjustments tracked alongside wellness — request accommodations formally, track their implementation, and see how they affect your wellbeing over time."
+    ],
+    screens:[
+      "Burnout Radar — 6-axis spider chart with risk assessment and trend analysis",
+      "Workplace Adjustments — formal request tracking from submission to implementation"
+    ],
+    benefits:[
+      "See your wellbeing across 6 dimensions in one visual. Spot the dimension that needs attention before it becomes a crisis. Recommendations adapt to your current state.",
+      "Request workplace adjustments with a paper trail. Track progress from 'submitted' through 'under review' to 'implemented'. Your employer sees the request; your burnout data stays private."
+    ],
+    connections:[
+      "Wellness data is generated from daily journal entries in the Life-Work Portal. The radar analyses 7 days of check-ins to build your current profile. This data never leaves your private space unless you share it.",
+      "Adjustment requests flow to the Employer Portal where managers can review and implement them. The request itself is visible; the underlying wellness data that motivated it stays private. This bidirectional flow is consent-controlled at every step."
+    ],
+    images:["Feature Burnout Radar.png","Feature Workplace Adjustments.png"]
+  },
+  {
+    id:"trust-accessibility",
+    group:"What Makes This Different",
+    title:"Trust Networks & Accessibility",
+    subtitle:"Find carers through trust, not ratings. Set your expectations in your own words. Adapt the interface to your needs — today's needs, not yesterday's.",
+    pill:"Trust & Access",
+    tags:["Trust summaries","Expectations document","Accessibility presets","Off-day mode"],
+    narrativeTitle:"People are not products to be rated. Interfaces are not one-size-fits-all.",
+    narrativeText:"NDDCC rejected star ratings for carers. Instead, trust summaries capture strengths, watchouts, and real feedback from people who have worked with that carer. Before a carer sees any of your data, you set consent scopes — schedule, medications, finances, health records — each independently controlled. Your Expectations & Boundaries document is versioned, shareable, and acknowledgement-tracked: 'What helps me', 'What doesn't help me', 'Boundaries', 'Accessibility & dignity'. Your support team acknowledges each version. And the interface itself adapts — four accessibility presets (Vision, Motor, Focus, Simplified) change multiple settings at once. Because on a hard day, you should not have to configure eight options just to read the screen.",
+    why:[
+      "Trust summaries instead of star ratings — strengths, watchouts, real feedback. Because reducing a carer to a number dehumanises both the carer and the person they support.",
+      "Consent scopes per carer — you decide whether they can see your schedule, medications, finances, or health records. Each scope is independent. Granular, not all-or-nothing.",
+      "Your Expectations document is yours to write. 10 sections covering what helps, what doesn't, boundaries, money, accessibility, and dignity. Versioned. Acknowledged by every team member.",
+      "Four accessibility presets adapt the entire interface in one click. Vision Support, Motor Support, Focus Support, Simplified. Because neurodivergent accessibility is not just font size."
+    ],
+    screens:[
+      "My Expectations & Boundaries — user-authored working agreements, versioned, acknowledgement-tracked",
+      "Find a Carer — trust summaries, consent scopes, verified status",
+      "Settings — accessibility presets, consent centre, display & interaction preferences"
+    ],
+    benefits:[
+      "Write your own rules of engagement. 'What helps me', 'Boundaries', 'Accessibility & dignity' — your words, acknowledged by your team. If they haven't read the latest version, the system flags it.",
+      "Find the right carer through narrative trust — not a number. See their strengths ('consistently reliable and patient'), their watchouts ('can be quite firm at times'), and feedback from people who know. Set consent scopes before they see anything.",
+      "One click: Vision Support activates high contrast, large text, reading mode, reduced motion, and low density simultaneously. Because on a hard day, one click is all you should need."
+    ],
+    connections:[
+      "Expectations documents are shared with consented support team members across the platform. When a new version is published, acknowledgement tracking ensures every team member reads it. MDT meeting preparation pulls the latest version automatically.",
+      "Carer search uses trust summaries contributed by the NDDCC community. Consent scopes are enforced by the central consent engine — if you revoke a carer's access to medications, it takes effect across every portal immediately.",
+      "Accessibility settings sync across all portals via the central user profile. Set it once in Independent Living, and it applies in Healthcare, Transition, Adult Learning — everywhere you go."
+    ],
+    images:["Independent Living Expectations.png","Independent Living Carer Search.png","Independent Living Settings.png"]
+  },
+  {
+    id:"cross-portal-sync",
+    group:"What Makes This Different",
+    title:"Cross-Portal Intelligence",
+    subtitle:"Actions assigned in one portal appear automatically in another. Consent changes propagate everywhere. The platform thinks in connections, not silos.",
+    pill:"Connected Platform",
+    tags:["Cross-portal sync","MDT actions","Consent propagation","Audit trail"],
+    narrativeTitle:"When a teacher is assigned an action in an MDT meeting, it appears in their portal. Automatically.",
+    narrativeText:"Most multi-agency platforms are really just multiple single-agency tools sharing a login screen. NDDCC is different. When an action is assigned during an MDT meeting — 'Mrs Smith: draft provision map update, due 2 days' — it appears in Mrs Smith's Teacher Portal automatically. When she completes it, the MDT meeting record updates. When a parent withdraws consent for health data sharing, every portal that references health data enforces that change immediately. When a safeguarding alert is raised in any portal, NDGuard escalates it across the platform. This is what 'connected' actually means. Not shared databases. Shared understanding.",
+    why:[
+      "Cross-portal action sync — assign an action in MDT, it appears in the assignee's home portal. Complete it there, it updates back. No re-keying. No emails. No 'did you get my message?'",
+      "Consent propagation — a single consent change ripples across all 24 portals instantly. Withdraw health data sharing, and every portal that touches health data respects it within seconds.",
+      "Safeguarding escalation — NDGuard monitors all portals. A concern raised in the school portal triggers alerts in social services, healthcare, and the LA dashboard simultaneously.",
+      "Every cross-portal action is audit-logged with receipt IDs. The immutable trail proves exactly what happened, when, by whom, and which portals were affected."
+    ],
+    screens:[
+      "MDT Actions — cross-portal task assignment with status tracking",
+      "MDT Teams — multi-disciplinary team directory",
+      "MDT Consent — per-meeting data sharing agreements"
+    ],
+    benefits:[
+      "Actions from MDT meetings flow to the right person in the right portal — teacher, SENCO, healthcare, social services. Overdue items are highlighted in red. No action gets lost between agencies.",
+      "See every professional involved in a child's support — their role, their portal, their responsibilities. The team directory is the single source of truth for multi-agency coordination.",
+      "Per-meeting consent ensures that data shared during a specific MDT meeting is governed separately from general consent. A parent can consent to sharing health data in one meeting but not another."
+    ],
+    connections:[
+      "Actions sync bidirectionally between the MDT portal and every assignee's home portal — Teacher, SENCO, Healthcare, Social Services, LA Dashboard, Navigator. Changes propagate in both directions.",
+      "Team membership references the central user directory and role-based access control. Adding a professional to an MDT team grants them scoped access to relevant case data across portals.",
+      "Meeting-level consent is layered on top of the central consent engine. General consent + meeting-specific consent = the most restrictive interpretation wins. Always protective, never permissive."
+    ],
+    images:["Feature Cross Portal Actions.png","Feature MDT Teams.png","Feature Consent MDT.png"]
+  },
+  {
     id:"portal-selector",
     group:"Explore",
     title:"Explore the Platform",
@@ -1778,7 +1909,7 @@ const slides = [
 
 let state = { slideIndex: 0, screenIndex: 0 };
 
-const FIXED_LEAD_IDS = ["coordination-reality","standards-assurance","safeguarding-consent","portal-selector"];
+const FIXED_LEAD_IDS = ["coordination-reality","standards-assurance","safeguarding-consent","consent-everywhere","burnout-radar","trust-accessibility","cross-portal-sync","portal-selector"];
 const SELECTABLE_PORTAL_IDS = slides.map(s=>s.id).filter(id=>!FIXED_LEAD_IDS.includes(id));
 const DEFAULT_PORTAL_SELECTION = ["child","parent","teacher","senco","local-authority","navigator","analytics","healthcare","mdt","main-dashboard","care-home","transition","independent-living","elder-care","employer","activist","adult-learning","life-work","login"];
 let selectedPortalIds = [];
