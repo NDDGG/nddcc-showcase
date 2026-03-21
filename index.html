@@ -1593,6 +1593,186 @@ const slides = [
       "Model training uses data from the platform's PostgreSQL database, processed through Teradata ClearScape's in-database ML functions. No data leaves the database for scoring — privacy by architecture."
     ],
     images:["Analytics Dashboard.png","Analytics Risk Overview.png","Analytics Model Management.png","Analytics Anomaly Detection.png"]
+  },
+  {
+    id:"main-dashboard",
+    group:"The Platform",
+    title:"Main Dashboard",
+    subtitle:"Your launchpad to every portal in the NDDCC platform.",
+    pill:"Platform Hub",
+    tags:["Navigation","Portal wheel","Care continuum","Consent"],
+    narrativeTitle:"Everything starts here.",
+    narrativeText:"The Main Dashboard is the single entry point to all 24 portals. The portal wheel gives instant visual access to every service. The care continuum maps a person's journey from childhood through adulthood, and the consent dashboard puts data control where it belongs — with the individual.",
+    why:["One place to reach every portal — no hunting through bookmarks or separate logins.","Visual care continuum from birth to independence — the full journey in one view.","Consent dashboard for full data transparency — see exactly who has access to what.","Role-based access shows only what matters to you — parents see parent tools, professionals see professional tools."],
+    screens:["Platform landing with quick-access tiles","Interactive portal wheel — all 24 portals in one view","Care continuum timeline visualisation","Consent dashboard — who has access to what"],
+    benefits:["Instant orientation for any user role — know where you are and where to go.","Navigate to any portal in a single click from the wheel.","Understand the full journey at a glance — childhood, education, transition, independence.","Review and manage data sharing permissions in real time."],
+    connections:["Aggregates status tiles from every connected portal — attendance from school, actions from SENCO, cases from social services.","Each spoke on the wheel deep-links into its portal — SENCO, Healthcare, Transition, and all others.","Pulls milestone data from Transition, Education, Healthcare, and Social Services portals to build the continuum.","Reads consent grants from the central consent engine shared by every portal."],
+    images:["Main Dashboard.png","Main Portal Wheel.png","Main Care Continuum.png","Main Consent Dashboard.png"]
+  },
+  {
+    id:"healthcare",
+    group:"Professional Portals",
+    title:"Healthcare Portal",
+    subtitle:"Clinical triage, patient management, and care coordination for NHS teams.",
+    pill:"Clinical",
+    tags:["NHS","Triage-first","Care coordination","Evidence-based"],
+    narrativeTitle:"Triage-first. Evidence-led. Coordination built in.",
+    narrativeText:"The Healthcare Portal gives clinical teams a triage-first work queue so the most urgent cases surface immediately. Patient records, referrals, care coordination, and consent management are unified in one interface. Every clinical decision is backed by an evidence library — no more hunting across disconnected systems.",
+    why:["Triage queue prioritises by clinical urgency — critical cases surface first, not buried in a general inbox.","Full patient view with linked SEND and social data — see the whole person, not just the referral.","Referral tracking from request through to outcome — nothing gets lost between services.","Evidence-based practice library at point of care — NICE guidelines and local protocols where decisions are made."],
+    screens:["Triage work queue — cases ranked by urgency","Clinical dashboard with caseload overview","Patient list with search and filters","Caseload management and allocation","Referral pipeline — incoming, in-progress, completed","Care coordination — multi-agency task board","Consent status per patient","Secure clinical messaging","Evidence-based practice library","Portal and notification settings"],
+    benefits:["Clinicians see highest-priority cases first — no manual sorting required.","At-a-glance workload metrics and alerts for the whole team.","Find any patient instantly across the full caseload.","Balance team workloads and reassign cases efficiently.","Track every referral from receipt to resolution with full audit trail.","Coordinate actions across health, education, and social care in one view.","Know exactly what data can be shared and with whom before acting.","Communicate with colleagues without leaving the clinical workflow.","Access NICE guidelines and local protocols at the point of care.","Customise notifications and display preferences for your workflow."],
+    connections:["Receives flagged cases from SENCO, Social Services, and MDT portals into the triage queue.","Aggregates data from Education, Transition, and Social Services portals into a unified clinical view.","Patient records link to SENCO SEN registers, school attendance, and LA referral data.","Caseload data feeds into MDT meeting agendas and LA Dashboard reporting.","Referrals originate from SENCO, Navigator, and Social Services — status flows back to the referring portal.","Tasks created here appear in MDT Actions and are visible to Social Services and SENCO coordinators.","Reads consent grants from the central consent engine; consent changes propagate to all linked portals.","Messages can cross-reference cases visible in MDT, Social Services, and SENCO portals.","Evidence and guidelines are shared with the Education Toolkit and SENCO best-practice libraries.","Settings sync with the central authentication and role management layer."],
+    images:["Healthcare Work Queue.png","Healthcare Dashboard.png","Healthcare Patients.png","Healthcare Caseload.png","Healthcare Referrals.png","Healthcare Care Coordination.png","Healthcare Consent.png","Healthcare Messages.png","Healthcare Evidence.png","Healthcare Settings.png"]
+  },
+  {
+    id:"mdt",
+    group:"Professional Portals",
+    title:"MDT Collaboration Portal",
+    subtitle:"Multi-disciplinary team meetings, actions, and shared case notes.",
+    pill:"Collaboration",
+    tags:["MDT","Meetings","Actions","Case notes"],
+    narrativeTitle:"Every professional. One table. Shared actions.",
+    narrativeText:"The MDT Portal brings health, education, and social care professionals into a single meeting space. Agendas are built collaboratively, actions are assigned with clear owners, and case notes are shared securely with full consent tracking. When a meeting ends, actions flow directly into each professional's home portal.",
+    why:["Structured meeting agendas with pre-populated case data from every portal.","Actions assigned to named professionals with deadlines — accountability built in.","Consent-aware case notes — nothing shared without explicit permission.","Cross-portal action sync so nothing falls between services."],
+    screens:["MDT dashboard — upcoming meetings and overdue actions","Meeting list with scheduling and status","Action tracker — owner, deadline, completion status","Team directory and role management","Shared case notes with version history","Consent dashboard — per-case data sharing agreements"],
+    benefits:["See what needs attention before the next meeting — no surprises.","Schedule, prepare, and review meetings in one place.","Track every action to completion with clear accountability.","Know who is in each team and their professional role.","Build a shared case record that every authorised professional can access.","Ensure data sharing complies with each individual's consent preferences."],
+    connections:["Pulls pending actions from Healthcare, SENCO, Social Services, and Transition portals into meeting preparation.","Meeting data feeds into Healthcare work queues and LA Dashboard reporting.","Completed actions sync back to the assigning portal — Healthcare, SENCO, or Social Services.","Team membership links to roles defined in the central authentication layer.","Case notes reference records from Healthcare, Education, and Social Services portals.","Consent status reads from the central consent engine and reflects changes made in any portal."],
+    images:["MDT Dashboard.png","MDT Meetings.png","MDT Actions.png","MDT Teams.png","MDT Case Notes.png","MDT Consent Dashboard.png"]
+  },
+  {
+    id:"login",
+    group:"The Platform",
+    title:"Login",
+    subtitle:"One login for every portal in the platform.",
+    pill:"Authentication",
+    tags:["Single sign-on","Security","Registration","Password recovery"],
+    narrativeTitle:"One account. Every portal.",
+    narrativeText:"Centralised authentication means a single username and password unlocks every portal a user is authorised to access. Role-based permissions ensure professionals see professional tools and individuals see their own data. Registration and password recovery are self-service.",
+    why:["Single sign-on across all 24 portals — one login, everywhere.","Role-based access — see only what you need, nothing more.","Self-service registration and password reset — no waiting for admin.","Session management with secure token refresh — safe and seamless."],
+    screens:["Login form with platform branding","Registration with role selection","Password recovery flow"],
+    benefits:["Authenticate once and move freely between portals.","New users onboard themselves with guided registration.","Regain access without contacting an administrator."],
+    connections:["Issues authentication tokens consumed by every portal in the platform.","Registration creates user records referenced by SENCO, Healthcare, LA Dashboard, and all other portals.","Password recovery integrates with the central user directory shared across all services."],
+    images:["Login Page.png","Login Register.png","Login Forgot Password.png"]
+  },
+  {
+    id:"care-home",
+    group:"Care Portals",
+    title:"Care Home Portal",
+    subtitle:"Residential care management — from shift handover to family updates.",
+    pill:"Residential Care",
+    tags:["Care home","Residents","Medication","Handover"],
+    narrativeTitle:"Every resident. Every shift. Nothing missed.",
+    narrativeText:"The Care Home Portal gives staff a complete picture of every resident — health status, medication schedules, daily activities, and incident logs. Shift handover is structured so critical information transfers reliably between teams. Families receive updates through a dedicated communications channel, closing the loop between professional care and home.",
+    why:["Resident profiles with health baselines and care plans — the full picture for every person.","Medication tracking with administration records — accountability at every dose.","Structured shift handover — no verbal-only handoffs that lose critical details.","Family communication channel for transparency and trust."],
+    screens:["Care home dashboard — occupancy, alerts, today's priorities","Resident directory with profiles and status","Health monitoring — vitals, trends, alerts","Medication management — schedules, administration, stock","Activities programme and participation tracking","Daily task checklist per resident","Incident logging with severity and follow-up","My Shift — personal task list for the current shift","Shift handover — structured notes for incoming staff","Reports — occupancy, incidents, compliance","Staff messaging","Family communications — updates, visits, feedback"],
+    benefits:["See the entire home's status at a glance.","Find any resident's profile, history, and care plan instantly.","Track vital signs over time and catch deterioration early.","Ensure every medication is given on time and recorded.","Plan activities and track who participates.","Never miss a daily care task.","Record incidents with full context for safeguarding and compliance.","Know exactly what you need to do this shift.","Hand over with confidence — structured notes, not memory.","Generate compliance and management reports on demand.","Communicate securely with colleagues across shifts.","Keep families informed and involved in care decisions."],
+    connections:["Aggregates alerts from Healthcare referrals, medication systems, and internal incident logs.","Resident records link to Healthcare patient data and Social Services case files.","Health data feeds into Healthcare Portal for clinical oversight and GP coordination.","Medication data syncs with Healthcare prescribing records.","Activity participation data is available to Social Services and Elder Care portals.","Task completion feeds into shift reporting and management dashboards.","Incidents are flagged to Social Services and LA Dashboard for safeguarding review.","Shift data integrates with the central staffing and rota management layer.","Handover notes are accessible to incoming staff and referenced in MDT meetings.","Reports feed into LA Dashboard compliance monitoring.","Messages can reference cases shared with Healthcare and Social Services portals.","Family updates reference care plan data shared with Elder Care and Healthcare portals."],
+    images:["Care Home Dashboard.png","Care Home Residents.png","Care Home Health Monitoring.png","Care Home Medication.png","Care Home Activities.png","Care Home Daily Tasks.png","Care Home Incidents.png","Care Home My Shift.png","Care Home Handover.png","Care Home Reports.png","Care Home Messages.png","Care Home Family Comms.png"]
+  },
+  {
+    id:"transition",
+    group:"Lifelong Support",
+    title:"Transition Portal",
+    subtitle:"Your pathway from school into adult life — planned around you.",
+    pill:"Transition Planning",
+    tags:["Transition","Pathway","Life skills","Independence"],
+    narrativeTitle:"Your future. Your plan. Your pace.",
+    narrativeText:"Leaving school is one of the biggest changes you will face. The Transition Portal helps you build a pathway that makes sense for your life — accommodation, education, work, finances, health, and the support network around you. Every goal is yours to set, and every review is a conversation, not an inspection.",
+    why:["Your pathway plan in one place — not scattered across services.","Life skills tracking so you can see your own progress over time.","Goals you set yourself, reviewed at your pace — not imposed on you.","Support network visible — you always know who is there for you."],
+    screens:["Transition dashboard — your priorities and next steps","My Pathway — the plan from here to independence","Life skills tracker — cooking, budgeting, travel, self-care","Accommodation planning and options","Education and work — courses, applications, placements","Finances — budgeting, benefits, entitlements","Health — appointments, medications, wellbeing","My Support — who is in your network and how to reach them","My Goals — what you want to achieve and by when","About Me — your profile, preferences, and communication needs","Reviews — upcoming and past transition reviews"],
+    benefits:["See what matters most right now without digging through paperwork.","Own your plan — update it, change it, make it yours.","Watch your skills grow over time and celebrate progress.","Explore housing options with clear information.","Find courses and jobs that fit your goals.","Understand your money — what comes in, what goes out, what you are entitled to.","Keep on top of health appointments and medications.","Know exactly who supports you and how to contact them.","Set goals that matter to you and track them your way.","Tell professionals who you are in your own words.","Prepare for reviews with your own notes and evidence."],
+    connections:["Pulls pending actions from SENCO, Healthcare, and Social Services portals into a single view.","Pathway data feeds into LA Dashboard reporting and MDT meeting preparation.","Life skills progress is visible to SENCO and Adult Learning portals for continuity.","Accommodation options link to Independent Living and Social Services housing data.","Education placements connect to School Portal records and Adult Learning course catalogues.","Financial entitlement data syncs with Social Services benefits tracking.","Health records link to Healthcare Portal patient data and appointment scheduling.","Support network references professionals from Healthcare, Social Services, SENCO, and MDT portals.","Goals are referenced in MDT meeting agendas and EHCP annual reviews.","About Me profile data is shared with any portal the person consents to.","Review outcomes feed back to SENCO, LA Dashboard, and Healthcare portals."],
+    images:["Transition Dashboard.png","Transition My Pathway.png","Transition Life Skills.png","Transition Accommodation.png","Transition Education Work.png","Transition Finances.png","Transition Health.png","Transition My Support.png","Transition My Goals.png","Transition About Me.png","Transition Reviews.png"]
+  },
+  {
+    id:"adult-learning",
+    group:"Lifelong Support",
+    title:"Adult Learning Portal",
+    subtitle:"Courses, reflections, and your story — at your own pace.",
+    pill:"Continuing Education",
+    tags:["Adult learning","Courses","Journal","Life story"],
+    narrativeTitle:"Learning does not stop when school ends.",
+    narrativeText:"The Adult Learning Portal is your space for continuing education — whatever that looks like for you. Browse courses, track your tasks, keep a reflective journal, and build your life story. There is no deadline pressure here. You learn at the pace that works for you.",
+    why:["Courses matched to your interests and goals — not a one-size-fits-all curriculum.","Task tracking so nothing slips through — gentle reminders, not pressure.","Reflective journal for processing experiences — private, personal, yours.","Life story — your narrative, in your own words, building over time."],
+    screens:["Learning dashboard — courses in progress, upcoming deadlines","Course catalogue and enrolment","Task list with priorities and due dates","Reflective journal — private entries and prompts","Life story — chapters, milestones, photos","Settings and accessibility preferences"],
+    benefits:["See your learning journey at a glance.","Find and enrol in courses that interest you.","Stay on top of assignments without feeling overwhelmed.","Reflect on what you have learned and how you feel about it.","Build a personal narrative that belongs to you.","Adjust fonts, contrast, and layout to suit your needs."],
+    connections:["Dashboard pulls course progress data from the central learning management layer.","Course catalogue links to Transition education plans and employer training offers.","Tasks sync with goals set in the Transition and Life-Work portals.","Journal entries can be optionally shared with support workers via the MDT portal.","Life story content is private by default but can be shared with consent through any linked portal.","Accessibility settings sync with preferences stored in the central user profile."],
+    images:["Adult Learning Dashboard.png","Adult Learning Courses.png","Adult Learning Tasks.png","Adult Learning Journal.png","Adult Learning Life Story.png","Adult Learning Settings.png"]
+  },
+  {
+    id:"life-work",
+    group:"Lifelong Support",
+    title:"Life & Work Portal",
+    subtitle:"Your daily life and employment — managed your way.",
+    pill:"Employment & Wellbeing",
+    tags:["Employment","Goals","Wellness","Adjustments"],
+    narrativeTitle:"Work and life. Balanced. Supported. Yours.",
+    narrativeText:"The Life & Work Portal helps you manage the daily balance between employment and everything else. Track your tasks, set meaningful goals, journal your experiences, request workplace adjustments, and monitor your wellness. This is not a performance tracker for your employer — it is a tool that belongs to you.",
+    why:["Tasks and goals in one place — work and personal, together.","Workplace adjustment requests with tracking — formal, not informal.","Wellness monitoring so you can spot patterns early.","Your data, your control — employers see only what you share."],
+    screens:["Life & Work dashboard — today's priorities","Task manager — work and personal tasks","Goal setting and progress tracking","Reflective journal — daily notes and patterns","Workplace adjustments — requests and accommodations","Wellness tracker — energy, mood, stress patterns","Preferences — notifications, display, data sharing"],
+    benefits:["Start each day knowing what matters most.","Keep on top of everything without separate apps.","Set goals that reflect what you actually want.","Process your day in a private, supportive space.","Request adjustments formally and track their progress.","Understand your own patterns and take action before burnout.","Control exactly what is visible to your employer."],
+    connections:["Aggregates tasks from Transition goals, Adult Learning assignments, and employer commitments.","Task data can sync with the Employer Portal for shared workplace items with consent.","Goals reference targets set in Transition and Adult Learning portals.","Journal is private; entries can optionally feed into MDT case notes with explicit consent.","Adjustment requests flow to the Employer Portal and are tracked in both systems.","Wellness data is private but can be shared with Healthcare for clinical support.","Data sharing preferences are enforced by the central consent engine across all portals."],
+    images:["Life Work Dashboard.png","Life Work Tasks.png","Life Work Goals.png","Life Work Journal.png","Life Work Adjustments.png","Life Work Wellness.png","Life Work Preferences.png"]
+  },
+  {
+    id:"independent-living",
+    group:"Lifelong Support",
+    title:"Independent Living Portal",
+    subtitle:"Your home. Your routines. Your independence.",
+    pill:"Independence",
+    tags:["Independent living","Routines","Medications","Crisis support"],
+    narrativeTitle:"Independence is not doing everything alone. It is having the right support when you need it.",
+    narrativeText:"The Independent Living Portal is the largest in the platform because independence touches everything — your daily routines, medications, appointments, money, home, work, health, and the people who support you. Crisis support is always one tap away. This portal grows with you as your confidence and independence grow.",
+    why:["Daily routines with reminders and checklists — structure that helps, not restricts.","Medications and appointments you can manage yourself — with backup when needed.","Crisis support always accessible — not buried in menus.","Finances, employment, healthcare, and skills all in one place."],
+    screens:["Today — what is happening right now","Routines — morning, afternoon, evening structures","Daily living — meals, cleaning, laundry, shopping","Medications — schedules, reminders, stock levels","Appointments — calendar with reminders","Communications — messages and contacts","Support network — who to call and when","Crisis support — immediate help and safety plans","About Me — profile, preferences, sensory needs","Finances — budgeting, bills, benefits","Employment — work schedule and adjustments","Healthcare — GP, prescriptions, wellbeing","Skills tracker — independence milestones","My Home — tenancy, maintenance, safety checks"],
+    benefits:["Know exactly what your day looks like before it starts.","Build routines that work for you and track consistency.","Manage household tasks with prompts and checklists.","Never miss a medication — reminders and confirmation tracking.","See upcoming appointments and get timely reminders.","Stay in touch with your support network easily.","Know who to contact for what — and reach them quickly.","Access crisis support instantly, including your personal safety plan.","Tell people what works for you — sensory needs, communication preferences.","Track your money confidently with simple budgeting tools.","Manage your work life alongside everything else.","Keep on top of prescriptions, appointments, and wellbeing checks.","Celebrate independence milestones and identify areas to develop.","Manage your home — repairs, safety checks, tenancy information."],
+    connections:["Pulls today's tasks from routines, medications, appointments, and employment schedules.","Routine templates can be co-created with support workers via the MDT portal.","Daily living skills progress feeds into the Transition life skills tracker.","Medication data syncs with Healthcare Portal prescribing and pharmacy records.","Appointment data links to Healthcare scheduling and Social Services reviews.","Messages integrate with the platform-wide secure messaging layer.","Support network references professionals from Healthcare, Social Services, and MDT portals.","Crisis plans link to Healthcare safety plans and Social Services emergency contacts.","Profile data is shared with consented portals via the central consent engine.","Financial data syncs with Social Services benefits tracking and Transition finance planning.","Employment data connects to the Life-Work and Employer portals.","Healthcare data links to the Healthcare Portal for clinical continuity.","Skills milestones feed into Transition progress tracking and Adult Learning goals.","Home management data links to Social Services housing support and Transition accommodation planning."],
+    images:["Independent Living Today.png","Independent Living Routines.png","Independent Living Daily Living.png","Independent Living Medications.png","Independent Living Appointments.png","Independent Living Communications.png","Independent Living Support.png","Independent Living Crisis.png","Independent Living Me.png","Independent Living Finances.png","Independent Living Employment.png","Independent Living Healthcare.png","Independent Living Skills.png","Independent Living My Home.png"]
+  },
+  {
+    id:"elder-care",
+    group:"Care Portals",
+    title:"Elder Care Portal",
+    subtitle:"Dignity, connection, and support — at every stage.",
+    pill:"Older Person Care",
+    tags:["Elder care","Memory support","Advocacy","Social connection"],
+    narrativeTitle:"You are still you. This portal remembers that.",
+    narrativeText:"The Elder Care Portal is built around the person, not the condition. Care plans, health monitoring, activities, and social connections sit alongside memory support tools, advocacy resources, and a personal journal. The games hub is not an afterthought — cognitive engagement matters. Every feature respects autonomy and dignity.",
+    why:["Care plans that centre the person, not the diagnosis.","Memory support tools designed with compassion — not clinical coldness.","Advocacy and rights information always accessible.","Social connections and cognitive engagement built in — not bolted on."],
+    screens:["Elder Care dashboard — wellbeing summary and today's plan","Today — meals, activities, medications, visitors","Care plans — goals, reviews, preferences","Health monitoring — vitals, trends, alerts","Activities — programme, participation, interests","Social connections — family, friends, community","Memory support — photos, prompts, familiar content","Advocacy — rights, representatives, complaints","Finances — budgeting, power of attorney, entitlements","Journal — personal reflections and memories","Games hub — cognitive engagement and recreation","People — family, carers, professionals","Resources — local services, guides, information","Messages — family and professional communications"],
+    benefits:["See the whole picture — health, mood, activities, and connections in one view.","Know what the day holds with a clear, simple layout.","Ensure care reflects preferences and is reviewed regularly.","Track health trends and catch changes early.","Stay active and engaged with meaningful activities.","Maintain and strengthen relationships that matter.","Support memory with familiar photos, music, and prompts.","Know your rights and access advocacy when needed.","Manage finances safely with appropriate oversight.","Capture thoughts, stories, and memories in your own words.","Enjoy games that are fun and cognitively stimulating.","See everyone involved in care and how to reach them.","Find local services, support groups, and useful information.","Stay connected with family and care teams easily."],
+    connections:["Aggregates health data from Healthcare, medication schedules from Care Home, and social activity records.","Today's schedule pulls from Care Home daily tasks, Healthcare appointments, and activity programmes.","Care plans link to Healthcare clinical records and Social Services support assessments.","Health monitoring data syncs with Healthcare Portal vitals and GP records.","Activity data is shared with Care Home activity programmes and Social Services reporting.","Social connections reference family contacts shared with Care Home family communications.","Memory support content can be contributed by family members through the Care Home family comms channel.","Advocacy resources link to LA Dashboard rights information and Social Services complaints procedures.","Financial data integrates with Social Services benefits tracking and power of attorney records.","Journal entries are private by default; sharing with professionals requires explicit consent.","Games hub engagement data feeds into wellbeing reporting.","People directory references contacts from Healthcare, Social Services, Care Home, and MDT portals.","Resources link to LA Dashboard service directories and community databases.","Messages integrate with Care Home family communications and the platform-wide messaging layer."],
+    images:["Elder Care Dashboard.png","Elder Care Today.png","Elder Care Plans.png","Elder Care Health.png","Elder Care Activities.png","Elder Care Social.png","Elder Care Memory Support.png","Elder Care Advocacy.png","Elder Care Finances.png","Elder Care Journal.png","Elder Care Games.png","Elder Care People.png","Elder Care Resources.png","Elder Care Messages.png"]
+  },
+  {
+    id:"employer",
+    group:"Professional Portals",
+    title:"Employer Portal",
+    subtitle:"Workplace accommodation and disability-confident employment.",
+    pill:"Workplace",
+    tags:["Employer","Adjustments","Disability Confident","Team wellness"],
+    narrativeTitle:"Inclusion is not a policy. It is how you manage every day.",
+    narrativeText:"The Employer Portal gives managers the tools to support neurodivergent and disabled employees properly. Adjustment requests are tracked from submission to implementation. Disability Confident commitments are monitored against real actions. Team wellness data — always anonymised — helps identify systemic issues before they become crises.",
+    why:["Adjustment tracking from request to implementation — no lost requests.","Disability Confident commitments tied to measurable actions — accountability.","Team wellness monitoring — anonymised and systemic, not surveillance.","Clear audit trail for compliance and best practice."],
+    screens:["Employer dashboard — team overview, pending adjustments, commitments","Team directory — employees, roles, adjustment status","Adjustment management — requests, approvals, implementation","Disability Confident commitments — pledges and progress","Team wellness — anonymised trends and intervention prompts"],
+    benefits:["See outstanding actions and team health at a glance.","Know your team and their support needs.","Process adjustment requests efficiently with full tracking.","Hold the organisation accountable to its own commitments.","Spot patterns early and act before individuals reach crisis."],
+    connections:["Aggregates adjustment requests from the Life-Work Portal and internal HR systems.","Team data links to user profiles in the central authentication layer.","Adjustment requests originate from the Life-Work Portal and are tracked in both systems.","Commitment progress feeds into LA Dashboard compliance reporting and organisational audits.","Wellness trends — anonymised — can inform Healthcare occupational health referrals and MDT discussions."],
+    images:["Employer Dashboard.png","Employer Team.png","Employer Adjustments.png","Employer Commitments.png","Employer Team Wellness.png"]
+  },
+  {
+    id:"activist",
+    group:"Community & Advocacy",
+    title:"Activist Portal",
+    subtitle:"Campaign. Report. Organise. Change the system.",
+    pill:"Advocacy & Action",
+    tags:["Activism","Campaigns","Bias reporting","Co-design"],
+    narrativeTitle:"Nothing about us without us.",
+    narrativeText:"The Activist Portal puts power where it belongs — with disabled and neurodivergent people and their allies. Run campaigns, report bias and discrimination, organise through clubs with proper governance, track policy changes, audit AI systems for fairness, and co-design the services that affect your life. This is not consultation theatre. This is direct action with structure.",
+    why:["Campaign tools with real reach tracking — not just awareness, impact.","Bias reporting with evidence and follow-up — discrimination documented and pursued.","Club governance modelled on Rotary — structured, democratic, effective.","AI audit tools — because algorithms affect disabled people disproportionately."],
+    screens:["Activist dashboard — active campaigns, recent reports, community pulse","Campaign management — create, plan, promote, measure","Action tracker — personal and community tasks","Bias and discrimination reports — submit, track, escalate","Community feed — discussions, events, solidarity","Clubs — governance, membership, meetings, minutes","Task manager — campaign and club actions","Policy tracker — legislation, consultations, impact analysis","Learning hub — rights, advocacy skills, legal frameworks","AI audit tools — algorithmic fairness checks and transparency","Co-design workspace — collaborative service design with professionals","Messages — secure communication across campaigns and clubs","Settings — notifications, privacy, data sharing preferences"],
+    benefits:["See the state of every campaign and the pulse of the community.","Build campaigns with structured planning and measurable outcomes.","Track your own contributions and the community's collective action.","Report bias with evidence and know it will be followed up.","Connect with people who share your goals and experiences.","Organise with democratic governance — not just group chats.","Keep every action tracked and accountable.","Monitor the policies that affect your life and respond in time.","Build the skills and knowledge to advocate effectively.","Hold AI systems accountable for fairness and transparency.","Shape services as a co-designer, not just a consultee.","Communicate securely with fellow activists and campaign teams.","Control your visibility and data sharing on your own terms."],
+    connections:["Aggregates campaign data, bias reports, and community activity into a single activist command centre.","Campaign outcomes and policy responses feed into LA Dashboard reporting and governance reviews.","Actions sync with personal task lists in the Life-Work and Transition portals.","Bias reports can reference data from any portal — Healthcare wait times, Education exclusions, Social Services decisions.","Community discussions can surface issues that trigger formal reviews in MDT and Peer Governance portals.","Club governance structures mirror the Peer Governance Portal's democratic review framework.","Tasks integrate with the platform-wide task management layer shared by Life-Work and Transition portals.","Policy tracking references legislation data shared with LA Dashboard and Peer Governance portals.","Learning content links to Adult Learning courses and Education Toolkit resources.","AI audit findings feed into the AI Safety Engine's bias detection and governance reporting.","Co-design outputs feed directly into portal development backlogs and MDT service design discussions.","Messages integrate with the platform-wide secure messaging layer.","Privacy settings are enforced by the central consent engine shared across all portals."],
+    images:["Activist Dashboard.png","Activist Campaigns.png","Activist Actions.png","Activist Bias Reports.png","Activist Community.png","Activist Clubs.png","Activist Tasks.png","Activist Policy Tracker.png","Activist Learning.png","Activist AI Audits.png","Activist Co-Design.png","Activist Messages.png","Activist Settings.png"]
   }
 ];
 
@@ -1600,7 +1780,7 @@ let state = { slideIndex: 0, screenIndex: 0 };
 
 const FIXED_LEAD_IDS = ["coordination-reality","standards-assurance","safeguarding-consent","portal-selector"];
 const SELECTABLE_PORTAL_IDS = slides.map(s=>s.id).filter(id=>!FIXED_LEAD_IDS.includes(id));
-const DEFAULT_PORTAL_SELECTION = ["child","parent","teacher","senco","local-authority","navigator","analytics"];
+const DEFAULT_PORTAL_SELECTION = ["child","parent","teacher","senco","local-authority","navigator","analytics","healthcare","mdt","main-dashboard","care-home","transition","independent-living","elder-care","employer","activist","adult-learning","life-work","login"];
 let selectedPortalIds = [];
 let activeSlides = [];
 
