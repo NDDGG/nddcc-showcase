@@ -1005,27 +1005,33 @@ const slides = [
       "Every consent change is audit-logged with an immutable receipt. If anyone ever asks 'who authorised this?', the answer is there."
     ],
     screens:[
-      "Consent Dashboard — child's view: My Decisions, Pending, Proxy, History tabs",
-      "Consent Dashboard — parent's view: managing consent for your child across agencies",
-      "Consent Dashboard — SENCO's view: seeing which data can be shared with which agencies",
+      "Consent Dashboard — data flow visualisation showing 3 sources, 3 permissions, 4 professionals accessing",
+      "Permissions List — every consent decision with status (Active, Inactive, Expired), source, recipient, and dates",
+      "Consent Management — pending requests from professionals with approve/deny actions",
+      "Consent Dashboard — SENCO's view: which data can be shared with which agencies",
       "Consent Dashboard — healthcare view: clinical consent status per patient",
-      "Consent Dashboard — social services view: cross-agency consent for looked-after children"
+      "Consent Dashboard — social services view: cross-agency consent for looked-after children",
+      "Consent Dashboard — MDT view: per-meeting data sharing agreements"
     ],
     benefits:[
-      "A child can see every consent decision that affects them — who has access to what, and why.",
-      "A parent manages consent from one screen — not five different logins across five different services.",
+      "See exactly how your child's data flows — 3 sources (School, Health, Social Care), 3 active permissions, 4 professionals accessing. The data flow visualisation makes the invisible visible.",
+      "Every permission listed with clear status chips — Active (green), Inactive (red), Expired (orange). Educational Records → Educational Psychologist. Behavioral Observations → SENCO. Medical Information → School Nurse. You see every decision at a glance.",
+      "Pending consent requests arrive with full context — who is asking, what data they want, why, and when it expires. Approve or deny with one click. No paperwork. No phone calls. No ambiguity.",
       "A SENCO knows exactly what data they can share before they pick up the phone or write an email.",
       "A clinician sees consent status per patient — no guessing, no over-sharing, no compliance risk.",
-      "A social worker sees cross-agency consent for looked-after children — education, health, placement data all governed consistently."
+      "A social worker sees cross-agency consent for looked-after children — education, health, placement data all governed consistently.",
+      "Per-meeting consent ensures data shared during a specific MDT meeting is governed separately. A parent can consent to sharing health data in one meeting but not another."
     ],
     connections:[
-      "The consent engine is shared across all 24 portals. A consent change made in the parent portal is immediately enforced in the healthcare portal, the school portal, the social services portal — everywhere.",
-      "Proxy authorisation links to the central user directory — when a parent is verified as a proxy, their authority scope is enforced across every portal the child uses.",
+      "The consent engine is shared across all 24 portals. A consent change made here is immediately enforced in the healthcare portal, the school portal, the social services portal — everywhere.",
+      "Permissions are domain-categorised (education, health, safeguarding) and show the exact data flow: source → permission → recipient. Nothing hidden.",
+      "Consent requests originate from professionals across the platform — a therapist requesting assessment records, a school requesting progress reports. Each request is tracked and auditable.",
       "SENCO consent view connects to the Navigator routing engine — if consent is withdrawn, document routing stops automatically.",
-      "Healthcare consent status feeds into the AI Safety Engine — if a child's data shouldn't be included in risk scoring, the consent engine enforces that at the database level.",
-      "Social services consent integrates with the safeguarding override system — NDGuard can override consent for child protection, but every override is logged and auditable."
+      "Healthcare consent status feeds into the AI Safety Engine — if a child's data shouldn't be in risk scoring, the consent engine enforces that at the database level.",
+      "Social services consent integrates with the safeguarding override system — NDGuard can override consent for child protection, but every override is logged.",
+      "MDT meeting consent is layered on general consent — the most restrictive interpretation always wins."
     ],
-    images:["Feature Consent Child.png","Feature Consent Parent.png","Feature Consent SENCO.png","Feature Consent Healthcare.png","Feature Consent Social Services.png"]
+    images:["Feature Consent Parent.png","Feature Consent Permissions List.png","Feature Consent Manager.png","Feature Consent SENCO.png","Feature Consent Healthcare.png","Feature Consent Social Services.png","Feature Consent MDT.png"]
   },
   {
     id:"burnout-radar",
