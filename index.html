@@ -1745,21 +1745,6 @@ const slides = [
     images:["Elder Care Dashboard.png","Elder Care Plans.png","Elder Care Health.png","Elder Care Activities.png","Elder Care Social.png","Elder Care Memory Support.png","Elder Care Advocacy.png","Elder Care Finances.png","Elder Care Journal.png","Elder Care People.png","Elder Care Resources.png","Elder Care Messages.png"]
   },
   {
-    id:"employer",
-    group:"Professional Portals",
-    title:"Employer Portal",
-    subtitle:"Workplace accommodation and disability-confident employment.",
-    pill:"Workplace",
-    tags:["Employer","Adjustments","Disability Confident","Team wellness"],
-    narrativeTitle:"Inclusion is not a policy. It is how you manage every day.",
-    narrativeText:"The Employer Portal gives managers the tools to support neurodivergent and disabled employees properly. Adjustment requests are tracked from submission to implementation. Disability Confident commitments are monitored against real actions. Team wellness data — always anonymised — helps identify systemic issues before they become crises.",
-    why:["Adjustment tracking from request to implementation — no lost requests.","Disability Confident commitments tied to measurable actions — accountability.","Team wellness monitoring — anonymised and systemic, not surveillance.","Clear audit trail for compliance and best practice."],
-    screens:["Employer dashboard — team overview, pending adjustments, commitments","Team directory — employees, roles, adjustment status","Adjustment management — requests, approvals, implementation","Disability Confident commitments — pledges and progress","Team wellness — anonymised trends and intervention prompts"],
-    benefits:["See outstanding actions and team health at a glance.","Know your team and their support needs.","Process adjustment requests efficiently with full tracking.","Hold the organisation accountable to its own commitments.","Spot patterns early and act before individuals reach crisis."],
-    connections:["Aggregates adjustment requests from the Life-Work Portal and internal HR systems.","Team data links to user profiles in the central authentication layer.","Adjustment requests originate from the Life-Work Portal and are tracked in both systems.","Commitment progress feeds into LA Dashboard compliance reporting and organisational audits.","Wellness trends — anonymised — can inform Healthcare occupational health referrals and MDT discussions."],
-    images:["Employer Dashboard.png","Employer Team.png","Employer Adjustments.png","Employer Commitments.png","Employer Team Wellness.png"]
-  },
-  {
     id:"activist",
     group:"Community & Advocacy",
     title:"Activist Portal",
@@ -1780,7 +1765,7 @@ let state = { slideIndex: 0, screenIndex: 0 };
 
 const FIXED_LEAD_IDS = ["coordination-reality","standards-assurance","safeguarding-consent","portal-selector"];
 const SELECTABLE_PORTAL_IDS = slides.map(s=>s.id).filter(id=>!FIXED_LEAD_IDS.includes(id));
-const DEFAULT_PORTAL_SELECTION = ["child","parent","teacher","senco","local-authority","navigator","analytics","healthcare","mdt","main-dashboard","care-home","transition","independent-living","elder-care","employer","activist","adult-learning","life-work","login"];
+const DEFAULT_PORTAL_SELECTION = ["child","parent","teacher","senco","local-authority","navigator","analytics","healthcare","mdt","main-dashboard","care-home","transition","independent-living","elder-care","activist","adult-learning","life-work","login"];
 let selectedPortalIds = [];
 let activeSlides = [];
 
