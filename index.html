@@ -1927,8 +1927,8 @@ function renderPortalSelector(){
   document.getElementById("thumbDots").innerHTML = "";
   document.getElementById("thumbLabels").innerHTML = "";
   document.getElementById("screenCount").textContent = "Selection screen";
-  document.getElementById("prevScreenBtn").disabled = true;
-  document.getElementById("nextScreenBtn").disabled = true;
+  document.getElementById("prevScreenBtn").disabled = state.slideIndex === 0;
+  document.getElementById("nextScreenBtn").disabled = !selectedPortalIds.length;
 
   stage.querySelectorAll('[data-portal-toggle]').forEach(input=>{
     input.addEventListener('click', e=> e.stopPropagation());
@@ -2011,8 +2011,8 @@ async function renderSlide(){
 
   if(slide.mode === "infographic"){
     document.getElementById("screenCount").textContent = "Infographic section";
-    document.getElementById("prevScreenBtn").disabled = true;
-    document.getElementById("nextScreenBtn").disabled = true;
+    document.getElementById("prevScreenBtn").disabled = state.slideIndex === 0;
+    document.getElementById("nextScreenBtn").disabled = state.slideIndex === activeSlides.length - 1;
     document.getElementById("benefitCard").style.display = "none";
     document.getElementById("connectCard").style.display = "none";
     stage.innerHTML = slide.render();
@@ -2022,8 +2022,8 @@ async function renderSlide(){
   const total = slide.images.length;
   state.screenIndex = Math.max(0, Math.min(state.screenIndex, total - 1));
   document.getElementById("screenCount").textContent = `Screen ${state.screenIndex + 1} of ${total}`;
-  document.getElementById("prevScreenBtn").disabled = total <= 1;
-  document.getElementById("nextScreenBtn").disabled = total <= 1;
+  document.getElementById("prevScreenBtn").disabled = state.slideIndex === 0 && state.screenIndex === 0;
+  document.getElementById("nextScreenBtn").disabled = state.slideIndex === activeSlides.length - 1 && state.screenIndex >= total - 1;
 
   slide.images.forEach((name, idx)=>{
     const d = document.createElement("button");
