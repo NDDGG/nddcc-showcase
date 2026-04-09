@@ -2393,7 +2393,7 @@ let state = { slideIndex: 0, screenIndex: 0 };
 const FIXED_LEAD_IDS = ["coordination-reality","standards-assurance","safeguarding-consent","consent-everywhere","burnout-radar","trust-accessibility","cross-portal-sync","portal-selector"];
 const SELECTABLE_PORTAL_IDS = slides.map(s=>s.id).filter(id=>!FIXED_LEAD_IDS.includes(id));
 const DEFAULT_PORTAL_SELECTION = ["child","child-in-care","parent","teacher","school","senco","foster-home","social-services","local-authority","navigator","en-command-centre","nrv","analytics","healthcare","mdt","main-dashboard","login","care-home","transition","adult-learning","life-work","independent-living","elder-care","employer","activist"];
-let selectedPortalIds = [...DEFAULT_PORTAL_SELECTION];
+let selectedPortalIds = [];
 let activeSlides = [];
 
 function buildActiveSlides(){
