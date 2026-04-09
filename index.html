@@ -642,7 +642,7 @@
       <div class="footer-bar">
         <div class="footer-left">
           <span class="tiny"><span class="status-dot"></span>NDDCC Platform Showcase</span>
-          <span class="tiny" id="pathHint">Built with care in the UK</span>
+          <span class="tiny" id="pathHint">NDDCC Platform Showcase v2.0 · Updated April 2026 · Built with care in the UK</span>
         </div>
         <div class="footer-right">
         </div>
@@ -895,7 +895,7 @@ const slides = [
       "Per-meeting consent ensures data shared during a specific MDT meeting is governed separately. A parent can consent to sharing health data in one meeting but not another."
     ],
     connections:[
-      "The consent engine is shared across all 24 portals. A consent change made here is immediately enforced in the healthcare portal, the school portal, the social services portal — everywhere.",
+      "The consent engine is shared across all 25 portals. A consent change made here is immediately enforced in the healthcare portal, the school portal, the social services portal — everywhere.",
       "Permissions are domain-categorised (education, health, safeguarding) and show the exact data flow: source → permission → recipient. Nothing hidden.",
       "Consent requests originate from professionals across the platform — a therapist requesting assessment records, a school requesting progress reports. Each request is tracked and auditable.",
       "SENCO consent view connects to the Navigator routing engine — if consent is withdrawn, document routing stops automatically.",
@@ -977,7 +977,7 @@ const slides = [
     narrativeText:"Most multi-agency platforms are really just multiple single-agency tools sharing a login screen. NDDCC is different. When an action is assigned during an MDT meeting — 'Mrs Smith: draft provision map update, due 2 days' — it appears in Mrs Smith's Teacher Portal automatically. When she completes it, the MDT meeting record updates. When a parent withdraws consent for health data sharing, every portal that references health data enforces that change immediately. When a safeguarding alert is raised in any portal, NDGuard escalates it across the platform. This is what 'connected' actually means. Not shared databases. Shared understanding.",
     why:[
       "Cross-portal action sync — assign an action in MDT, it appears in the assignee's home portal. Complete it there, it updates back. No re-keying. No emails. No 'did you get my message?'",
-      "Consent propagation — a single consent change ripples across all 24 portals instantly. Withdraw health data sharing, and every portal that touches health data respects it within seconds.",
+      "Consent propagation — a single consent change ripples across all 25 portals instantly. Withdraw health data sharing, and every portal that touches health data respects it within seconds.",
       "Safeguarding escalation — NDGuard monitors all portals. A concern raised in the school portal triggers alerts in social services, healthcare, and the LA dashboard simultaneously.",
       "Every cross-portal action is audit-logged with receipt IDs. The immutable trail proves exactly what happened, when, by whom, and which portals were affected."
     ],
@@ -1298,7 +1298,7 @@ const slides = [
     narrativeText:"The foster home portal brings daily care into the platform. Four children, each with wellbeing, school, and behaviour scores. A daily schedule from morning school prep to family dinner. Upcoming reminders for counselling sessions and parent-teacher meetings. Quick actions for logging behaviour, health checks, school updates, and contacting support. This is how foster carers stay connected to the wider support picture without drowning in paperwork.",
     why:[
       "Wellbeing bars for each child (Wellbeing/School/Behaviour) show how each child is doing across three dimensions — at a glance, every morning.",
-      "Lucas M. at 75% overall with behaviour at 70% — this kind of visibility lets carers and social workers intervene early, not after a crisis.",
+      "Riley Johnson at 75% overall with behaviour at 70% — this kind of visibility lets carers and social workers intervene early, not after a crisis.",
       "Today’s Schedule keeps the daily routine coordinated across four children — therapy sessions, tutoring, school prep, dinner time.",
       "Quick Actions (Log Behaviour, Health Check, School Update, Contact Support) work at the pace of a real foster home — quick, specific, actionable.",
       "Upcoming Reminders with countdowns mean nothing gets missed in a busy household."
@@ -1487,13 +1487,13 @@ const slides = [
     pill:"Infrastructure & governance",
     tags:["Service health","Queue management","Quarantine","Audit trail"],
     narrativeTitle:"Operated, not just deployed",
-    narrativeText:"The EN Command Centre is the operational control plane for the entire NDDCC platform. Six core services monitored with CPU, RAM, and status. Queue depths showing throughput capacity. A quarantine system that catches failed validations before they affect users. An audit trail that records every significant action. A portal monitor that shows the health of all 24 portals. This is what separates a platform from a prototype.",
+    narrativeText:"The EN Command Centre is the operational control plane for the entire NDDCC platform. Six core services monitored with CPU, RAM, and status. Queue depths showing throughput capacity. A quarantine system that catches failed validations before they affect users. An audit trail that records every significant action. A portal monitor that shows the health of all 25 portals. This is what separates a platform from a prototype.",
     why:[
       "The Control Tower shows 6 services (Gateway, Ingest, Transform, Router, Safety, Registry) with real-time status. Problems are caught before users notice.",
       "Queue depths with processing rates show the system’s capacity and current load. If something is backing up, the ops team knows immediately.",
       "Quarantine catches documents and transactions that fail validation — they’re surfaced for human review, not silently dropped.",
       "The Audit Viewer provides a searchable record of every significant platform action. When someone asks ‘who accessed this record?’, the answer is there in seconds.",
-      "Portal Monitor shows all 24 portals — health, uptime, active users, errors. One view of the entire deployment."
+      "Portal Monitor shows all 25 portals — health, uptime, active users, errors. One view of the entire deployment."
     ],
     screens:[
       "Overview — control tower, queues, quarantine",
@@ -1515,7 +1515,7 @@ const slides = [
       "Warnings and incidents with severity, timestamp, and suggested action. Problems surfaced, not hidden.",
       "Pipeline throughput: what’s queued, processing, complete, failed. The capacity planning view.",
       "The safety net: failed validations, anomalous transactions, consent questions — held for human review, not dropped.",
-      "Every portal’s health in one view: status, uptime, users, errors. Essential when you’re running 24 portals.",
+      "Every portal’s health in one view: status, uptime, users, errors. Essential when you’re running 25 portals.",
       "External integrations: databases, APIs, notification services, document stores. Degradation visible immediately.",
       "Document volumes, processing times, routing success rates. System throughput made visible.",
       "Every login, data access, consent change, routing event, configuration update — recorded and searchable.",
@@ -1526,14 +1526,14 @@ const slides = [
       "Extended infrastructure settings."
     ],
     connections:[
-      "The Command Centre monitors every other portal in the platform. Service health, queue processing, and error rates from all 24 portals flow here.",
+      "The Command Centre monitors every other portal in the platform. Service health, queue processing, and error rates from all 25 portals flow here.",
       "Alerts aggregate from all services — Navigator routing failures, consent processing errors, portal health issues. Everything surfaces here.",
       "Queue data comes from the Navigator portal’s routing and intake pipelines. When documents are being processed, this is where throughput is monitored.",
       "Quarantine items originate from Navigator (document validation) and from the consent engine (access decision anomalies).",
       "Portal Monitor tracks every portal — child, parent, teacher, school, SENCO, social services, foster home, LA, Navigator, NRV, and all others.",
       "Connector status affects every portal that depends on external integrations — database connections, API endpoints, notification delivery.",
       "Document processing data comes from the Navigator portal’s intake and routing pipelines.",
-      "Audit data is generated by every portal in the platform. Every login, every access, every change — from all 24 portals — flows here.",
+      "Audit data is generated by every portal in the platform. Every login, every access, every change — from all 25 portals — flows here.",
       "Audit Viewer queries the same audit data that’s generated across all portals. Cross-portal audit trail in one searchable view.",
       "Portal configuration affects how each individual portal behaves — changes here ripple through to the portal’s users.",
       "System configuration governs platform-wide behaviour — authentication, security, rate limiting across all portals.",
@@ -1546,13 +1546,13 @@ const slides = [
     id:"nrv",
     group:"Infrastructure & Governance",
     title:"NRV — Neurodivergent Research Vault",
-    subtitle:"102 research papers, AI-powered semantic search, 10 trusted sources — evidence-based practice at the point of need.",
+    subtitle:"1,366 research papers, AI-powered semantic search, 24 trusted sources — evidence-based practice at the point of need.",
     pill:"Research & evidence",
-    tags:["Evidence base","Semantic search","102 papers","Trusted sources"],
+    tags:["Evidence base","Semantic search","1,366 papers","Trusted sources"],
     narrativeTitle:"Evidence where decisions are made",
-    narrativeText:"The Research Vault is the evidence layer beneath the platform. 102 research papers from 10 trusted sources, searchable with AI-powered semantic search. When a SENCO needs to justify an intervention choice, or a teacher wants to understand a neurodivergent condition, or a social worker needs evidence for a court report — the research is here. Not a Google search. A governed, quality-controlled evidence library built for the people using the platform.",
+    narrativeText:"The Research Vault is the evidence layer beneath the platform. 1,366 research papers from 24 trusted sources, searchable with AI-powered semantic search. When a SENCO needs to justify an intervention choice, or a teacher wants to understand a neurodivergent condition, or a social worker needs evidence for a court report — the research is here. Not a Google search. A governed, quality-controlled evidence library built for the people using the platform.",
     why:[
-      "102 research papers curated from 10 trusted sources. Quality-controlled, not everything-on-the-internet.",
+      "1,366 research papers curated from 24 trusted sources. 342 rated high evidence across 8 populations. Quality-controlled, not everything-on-the-internet.",
       "AI-powered semantic search means you can search by meaning — ‘strategies for sensory overwhelm in Year 3’ returns relevant results, not just keyword matches.",
       "Evidence at the point of need means intervention decisions are backed by research, not just experience or habit.",
       "Trusted source curation means the evidence base is validated and maintained — not a static library that goes stale."
@@ -1561,7 +1561,7 @@ const slides = [
       "Research Vault — search, filters, trusted sources"
     ],
     benefits:[
-      "102 papers, 10 trusted sources, AI-powered search. Evidence-based practice made accessible — not academic, not buried, not out of date."
+      "1,366 papers, 24 trusted sources, AI-powered search. Evidence-based practice made accessible — not academic, not buried, not out of date."
     ],
     connections:[
       "The Research Vault is accessible from the SENCO portal (intervention evidence), the teacher portal (understanding conditions), and the social services portal (court report evidence). Research travels to where decisions are made."
@@ -1578,7 +1578,7 @@ const slides = [
     narrativeTitle:"Data that sees what people miss",
     narrativeText:"The Analytics Portal is the predictive intelligence layer of the platform. It uses Teradata ClearScape's in-database machine learning to score every child across multiple risk dimensions — exclusion risk, attendance collapse, intervention effectiveness — and surfaces the children who need attention before a crisis develops. This is not a retrospective reporting tool. It is a forward-looking early warning system that runs inside the database where the data lives, so nothing is extracted, copied, or exposed unnecessarily.",
     why:[
-      "75 children scored across multiple risk dimensions in real time. The dashboard shows composite risk distribution — 94% Low, 5% Moderate, 2% Critical — so teams focus where it matters.",
+      "1,247 children scored across multiple risk dimensions in real time. The dashboard shows composite risk distribution — 42% Low, 10% Moderate, 16% High, 6% Critical, 6% Emergency — so teams focus where it matters.",
       "13 deployed ML models (ML_GLM algorithm) running inside Teradata ClearScape. Models are trained on platform data and score children using exclusion risk, attendance collapse, and intervention features.",
       "Anomaly detection uses Z-score analysis to identify children whose metrics deviate significantly from expected norms — catching problems that manual review would miss.",
       "Risk Overview shows every child's full risk profile — ND profile, exclusion risk, attendance risk, composite score, and risk level — filterable and sortable for case prioritisation."
@@ -1590,7 +1590,7 @@ const slides = [
       "Anomaly Detection — Z-score statistical analysis, severity filtering, metric-level anomaly identification"
     ],
     benefits:[
-      "Population-level risk intelligence at a glance. 75 children, 277 active interventions, composite risk distribution — the numbers that matter for strategic resource allocation.",
+      "Population-level risk intelligence at a glance. 1,247 children, 342 active interventions, composite risk distribution — the numbers that matter for strategic resource allocation.",
       "Every child scored and ranked. Filter by ND profile (ASD, ADHD, Dyspraxia, Tourette, Sensory Processing) and risk level to find who needs attention now.",
       "13 machine learning models deployed and manageable from one screen. Train, retrain, monitor accuracy, and track coefficient storage — ML governance built in.",
       "Statistical anomaly detection catches what human review misses. When a child's metrics deviate from expected norms, the system flags it before it becomes a crisis."
@@ -1611,9 +1611,9 @@ const slides = [
     pill:"Platform Hub",
     tags:["Navigation","Portal wheel","Care continuum","Consent"],
     narrativeTitle:"Everything starts here.",
-    narrativeText:"The Main Dashboard is the single entry point to all 24 portals. The portal wheel gives instant visual access to every service. The care continuum maps a person's journey from childhood through adulthood, and the consent dashboard puts data control where it belongs — with the individual.",
+    narrativeText:"The Main Dashboard is the single entry point to all 25 portals. The portal wheel gives instant visual access to every service. The care continuum maps a person's journey from childhood through adulthood, and the consent dashboard puts data control where it belongs — with the individual.",
     why:["One place to reach every portal — no hunting through bookmarks or separate logins.","Visual care continuum from birth to independence — the full journey in one view.","Consent dashboard for full data transparency — see exactly who has access to what.","Role-based access shows only what matters to you — parents see parent tools, professionals see professional tools."],
-    screens:["Platform landing with quick-access tiles","Interactive portal wheel — all 24 portals in one view","Care continuum timeline visualisation","Consent dashboard — who has access to what"],
+    screens:["Platform landing with quick-access tiles","Interactive portal wheel — all 25 portals in one view","Care continuum — track support across life stages","Consent dashboard — who has access to what"],
     benefits:["Instant orientation for any user role — know where you are and where to go.","Navigate to any portal in a single click from the wheel.","Understand the full journey at a glance — childhood, education, transition, independence.","Review and manage data sharing permissions in real time."],
     connections:["Aggregates status tiles from every connected portal — attendance from school, actions from SENCO, cases from social services.","Each spoke on the wheel deep-links into its portal — SENCO, Healthcare, Transition, and all others.","Pulls milestone data from Transition, Education, Healthcare, and Social Services portals to build the continuum.","Reads consent grants from the central consent engine shared by every portal."],
     images:["Main Dashboard.png","Main Portal Wheel.png","Main Care Continuum.png","Main Consent Dashboard.png"]
@@ -1657,9 +1657,9 @@ const slides = [
     tags:["Single sign-on","Security","Registration","Password recovery"],
     narrativeTitle:"One account. Every portal.",
     narrativeText:"Centralised authentication means a single username and password unlocks every portal a user is authorised to access. Role-based permissions ensure professionals see professional tools and individuals see their own data. Registration and password recovery are self-service.",
-    why:["Single sign-on across all 24 portals — one login, everywhere.","Role-based access — see only what you need, nothing more.","Self-service registration and password reset — no waiting for admin.","Session management with secure token refresh — safe and seamless."],
+    why:["Single sign-on across all 25 portals — one login, everywhere.","Role-based access — see only what you need, nothing more.","Self-service registration and password reset — no waiting for admin.","Session management with secure token refresh — safe and seamless."],
     screens:["Login form with platform branding"],
-    benefits:["Authenticate once and move freely between portals. Single sign-on across all 24 portals with role-based access and self-service registration."],
+    benefits:["Authenticate once and move freely between portals. Single sign-on across all 25 portals with role-based access and self-service registration."],
     connections:["Issues authentication tokens consumed by every portal in the platform. Registration creates user records referenced by SENCO, Healthcare, LA Dashboard, and all other portals."],
     images:["Login Portal.png"]
   },
